@@ -1,8 +1,9 @@
-#include <string> 
+#pragma once
+#include <string>
 
 enum class NodeType{source,sink,submission,reviewer};
 
-struct Node{
+struct NodeInfo{
 
     NodeType type;
     int id;
@@ -14,4 +15,8 @@ struct Node{
     std::string authors;
     std::string reviewerName;
     std::string email;
+
+    bool operator==(const NodeInfo& other) const {
+        return (this->id == other.id) && (this->type == other.type);
+    }
 };
