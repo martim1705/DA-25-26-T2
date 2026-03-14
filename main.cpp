@@ -24,25 +24,34 @@ int main() {
         cin >> op;
 
         switch(op) {
+
             case 0:
-            running = false;
-            break;
+                running = false;
+                break;
+            
             case 1:
-            break;
+                break;
+            
             case 2:
-            break;
+                break;
+            
             case 3:
-            break;
+                break;
+            
             case 4:
-            break;
+                break;
+            
             case 5:
-            break;
+                break;
+            
             case 6:
-            break;
+                break;
+            
             case 7:
-            break;
+                break;
+            
             case 8:
-            break;
+                break;
 
             default:
 
