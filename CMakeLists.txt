@@ -8,14 +8,14 @@ project(DA-25-26-T2)
 set(CMAKE_CXX_STANDARD 14)
 
 # Cria o executável com todos os ficheiros
-add_executable(DA2026_PRJ1
+add_executable(project
         main.cpp
         CentralManager.cpp
         Parser.cpp
         MaxFlow.cpp
-        
-        # Truque do CLion: listar os .h aqui não afeta a compilação, 
-        # mas faz com que eles apareçam na barra lateral do editor 
+
+        # Truque do CLion: listar os .h aqui não afeta a compilação,
+        # mas faz com que eles apareçam na barra lateral do editor
         CentralManager.h
         Parser.h
         MaxFlow.h
