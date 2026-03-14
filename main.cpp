@@ -4,22 +4,50 @@ using namespace std;
 int main() {
      
     int op; 
-
-    while (op != 0) {
+    bool running = true;
+    while (running) {
         
-        cout << "1 - Load input file\n";
-        cout << "2 - Show submissions\n";
-        cout << "3 - Show reviewers\n";
-        cout << "4 - Load input file\n";
-        cout << "5 - Show submissions\n";
-        cout << "6 - Show reviewers\n";
-        cout << "7 - Load input file\n";
-        cout << "8 - Show submissions\n";
-        cout << "0 - Exit\n";
+        cout << "------------------------------------\n";
+
+        cout << "\t1 - Load input file\t\n";
+        cout << "\t2 - Show submissions\t\n";
+        cout << "\t3 - Show reviewers\t\n";
+        cout << "\t4 - Load input file\t\n";
+        cout << "\t5 - Show submissions\t\n";
+        cout << "\t6 - Show reviewers\t\n";
+        cout << "\t7 - Load input file\t\n";
+        cout << "\t8 - Show submissions\t\n";
+        cout << "\t0 - Exit\t";
+        
+        cout << "\n------------------------------------\n";
         cout << "Operation: ";
         cin >> op;
 
-        
+        switch(op) {
+            case 0:
+            running = false;
+            break;
+            case 1:
+            break;
+            case 2:
+            break;
+            case 3:
+            break;
+            case 4:
+            break;
+            case 5:
+            break;
+            case 6:
+            break;
+            case 7:
+            break;
+            case 8:
+            break;
+
+            default:
+
+                cout << "Operation unavailable\n";
+        }
     }
 
     return 0; 
