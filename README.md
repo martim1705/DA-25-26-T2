@@ -1,6 +1,10 @@
 # DA-25-26-T2
 Projeto de Desenho de Algoritmos 25/26
 
+O CentralManager parece estar a crescer bem,
+se calhar é melhor ter o menu fora deste, num ficheiro à parte.
+Menu.h e Menu.cpp
+
 Code/
 ├── main.cpp
 ├── CentralManager.h
