@@ -1,3 +1,21 @@
-./.idea/
+# IDE files
+.idea/
+
+# Build folders
+build/
 cmake-build-*/
-CMakeLists.txt
+
+# Object files
+*.o
+
+# Executables
+main
+*.out
+*.exe
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
