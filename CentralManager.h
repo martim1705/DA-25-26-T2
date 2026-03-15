@@ -4,6 +4,7 @@
 #include "DataEntities.h"
 #include <unordered_map>
 #include <string>
+#include <iostream>
 
 class CentralManager {
 private:
@@ -65,5 +66,9 @@ public:
     void setGenerateAssignments(int gen);
     void setRiskAnalysis(int risk);
     void setOutputFilename(const std::string& name);
+
+    // Tarefa 1.1 - tipos de menus
+    void runInteractiveMenu();
+    void runBatchMode(const std::string & string, const std::string & risk_file);
 };
 

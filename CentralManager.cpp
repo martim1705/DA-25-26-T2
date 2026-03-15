@@ -70,3 +70,68 @@ void CentralManager::setRiskAnalysis(const int risk) {
 void CentralManager::setOutputFilename(const std::string& name) {
     this->outputFilename = name;
 }
+
+
+// Menus
+
+void runBatchMode(const std::string & string, const std::string & risk_file) {
+    std::cout << "Batch Mode\n";
+}
+
+void CentralManager::runInteractiveMenu() {
+    int op;
+    bool running = true;
+    while (running) {
+
+        std::cout << "------------------------------------\n";
+
+        std::cout << "\t1 - Load input file\t\n";
+        std::cout << "\t2 - Show submissions\t\n";
+        std::cout << "\t3 - Show reviewers\t\n";
+        std::cout << "\t4 - Load input file\t\n";
+        std::cout << "\t5 - Show submissions\t\n";
+        std::cout << "\t6 - Show reviewers\t\n";
+        std::cout << "\t7 - Load input file\t\n";
+        std::cout << "\t8 - Show submissions\t\n";
+        std::cout << "\t0 - Exit\t";
+
+        std::cout << "\n------------------------------------\n";
+        std::cout << "Operation: ";
+        std::cin >> op;
+
+        switch(op) {
+
+            case 0:
+                running = false;
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+
+            case 6:
+                break;
+
+            case 7:
+                break;
+
+            case 8:
+                break;
+
+            default:
+
+                std::cout << "Operation unavailable\n";
+        }
+    }
+}

@@ -1,63 +1,23 @@
 #include <iostream>
+#include <string>
+#include "CentralManager.h"
 using namespace std; 
 
-int main() {
-     
-    int op; 
-    bool running = true;
-    while (running) {
-        
-        cout << "------------------------------------\n";
+int main(int argc, char* argv[]) { // VOLTAR PARA COLOCAR ERROS DE USO. POR EXEMPLO SE O UTILIZADOR ESCREVER ./myprog -b DEVERIA DAR MENSAGEM DE ERRO EM BATCH MODE?
 
-        cout << "\t1 - Load input file\t\n";
-        cout << "\t2 - Show submissions\t\n";
-        cout << "\t3 - Show reviewers\t\n";
-        cout << "\t4 - Load input file\t\n";
-        cout << "\t5 - Show submissions\t\n";
-        cout << "\t6 - Show reviewers\t\n";
-        cout << "\t7 - Load input file\t\n";
-        cout << "\t8 - Show submissions\t\n";
-        cout << "\t0 - Exit\t";
-        
-        cout << "\n------------------------------------\n";
-        cout << "Operation: ";
-        cin >> op;
-
-        switch(op) {
-
-            case 0:
-                running = false;
-                break;
-            
-            case 1:
-                break;
-            
-            case 2:
-                break;
-            
-            case 3:
-                break;
-            
-            case 4:
-                break;
-            
-            case 5:
-                break;
-            
-            case 6:
-                break;
-            
-            case 7:
-                break;
-            
-            case 8:
-                break;
-
-            default:
-
-                cout << "Operation unavailable\n";
+    CentralManager central_manager;
+    if (argc >= 3 && string(argv[1]) == "-b") { // run batch mode
+        const string inputFile = argv[2];
+        string riskFile = ""; // without riskFile
+        if (argc == 4) {
+            riskFile = argv[3]; // with riskFile
         }
+        central_manager.runBatchMode(inputFile, riskFile);
+        cout << "Program finished.\n";
     }
-
+    else {
+        central_manager.runInteractiveMenu();
+        cout << "Program finished.\n";
+    }
     return 0; 
 }
