@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/project.dir/main.cpp.o CMakeFiles/project.dir/CentralManager.cpp.o CMakeFiles/project.dir/Parser.cpp.o CMakeFiles/project.dir/MaxFlow.cpp.o -o project 

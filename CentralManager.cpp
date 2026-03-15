@@ -73,10 +73,11 @@ void CentralManager::setOutputFilename(const std::string& name) {
 
 
 // Menus
-
-void runBatchMode(const std::string & string, const std::string & risk_file) {
+void CentralManager::runBatchMode(const std::string &string, const std::string &risk_file) {
     std::cout << "Batch Mode\n";
 }
+
+
 
 void CentralManager::runInteractiveMenu() {
     int op;
