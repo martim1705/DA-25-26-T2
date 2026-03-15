@@ -8,6 +8,11 @@
 class CentralManager {
 private:
 
+    /*
+    Creates a source node, a sink node, reviewer vertices, and submission vertices.
+    Adds edges from source to reviewers, from reviewers to compatible submissions,
+    and from submissions to sink
+    */
     void buildPrimaryOnlyNetwork(
         Graph<NodeInfo>& network,
         std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
@@ -17,10 +22,18 @@ private:
         int excludeReviewerId = -1
     ) const;
 
+    /* 
+    Reads the flow values on reviewer-to-submission edges and keeps the matches
+    with positive flow.
+    */
     std::vector<std::tuple<int,int,int>> extractAssignement(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs
     ) const;
 
+    /*
+    Compares the flow reaching the sink with the required minimum number of reviews
+    for each submission.
+    */
     std::vector<std::tuple<int,int,int>> extractMissingReviews(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netSubs
     ) const;
@@ -90,10 +103,25 @@ public:
     void showReviewers() const;
     void showParameters() const;
 
+    /*
+    Builds the flow network, computes the maximum flow, and stores the resulting
+    assignments or missing reviews.
+    */
     bool runPrimaryOnlyAssigment();
+
+    /*
+    A reviewer is considered risky if removing them from the network makes the
+    assignment infeasible.
+    */
     std::vector<int> evaluateRiskone() const;
 
+    /*
+    Writes either the successful assignment lists or the list of submissions with
+    missing reviews, depending on the latest execution result.
+    */
     bool writeAssignementOutput(const std::string& filename) const;
+
+    //Writes the result of the risk analysis to an output file.
     bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
 };
 

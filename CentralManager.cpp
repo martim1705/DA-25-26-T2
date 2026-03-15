@@ -12,6 +12,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
     Vertex<NodeInfo>*& sink,
     int excludedReviewerId
 ) const {
+    // Create source and sink nodes for the flow network.
     NodeInfo src{NodeType::source, -1, -1, -1, "", "", "", ""};
     NodeInfo snk{NodeType::sink, -2, -1, -1, "", "", "", ""};
 
@@ -21,6 +22,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
     source = network.findVertex(src);
     sink = network.findVertex(snk);
 
+     // Add reviewer vertices, optionally skipping one reviewer for risk analysis.
     for (const auto& [id, v] : reviewers) {
         if (id == excludedReviewerId) continue;
 
@@ -29,16 +31,19 @@ void CentralManager::buildPrimaryOnlyNetwork(
         netRevs[id] = network.findVertex(info);
     }
 
+    // Add submission vertices to the flow network.
     for (const auto& [id, v] : submissions) {
         NodeInfo info = v->getInfo();
         network.addVertex(info);
         netSubs[id] = network.findVertex(info);
     }
 
+    // Limit the maximum number of assignments per reviewer.
     for (const auto& [rid, rv] : netRevs) {
         MaxFlow::addResidualEdge(source, rv, maxReviewsPerReviewer);
     }
 
+    // Connect reviewers to submissions when their primary domains match.
     for (const auto& [rid, rv] : netRevs) {
         for (const auto& [sid, sv] : netSubs) {
             if (rv->getInfo().primaryDomain == sv->getInfo().primaryDomain) {
@@ -47,6 +52,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
         }
     }
 
+    // Require each submission to receive the minimum number of reviews.
     for (const auto& [sid, sv] : netSubs) {
         MaxFlow::addResidualEdge(sv, sink, minReviewsPerSubmission);
     }
