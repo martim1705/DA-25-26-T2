@@ -1,4 +1,5 @@
 #include "CentralManager.h"
+#include "Parser.h"
 #include "MaxFlow.h"
 #include <algorithm>
 #include <fstream>
@@ -58,6 +59,17 @@ void CentralManager::buildPrimaryOnlyNetwork(
     }
 }
 
+bool CentralManager::loadFiles(const std::string &filename) {
+    Parser parser(*this);
+
+    const bool success = parser.loadData(filename);
+    if (!success) {
+        std::cerr<<"Error: CentralManager Failed to Load Data from"<< filename<<"\n"<<std::endl;
+    }
+
+    return success;
+
+}
 /**SubSets*/
 void CentralManager::addSubmission(const int id, const NodeInfo& info) {
     // 1. Inserir o nó fisicamente no Grafo
@@ -67,6 +79,11 @@ void CentralManager::addSubmission(const int id, const NodeInfo& info) {
     submissions[id] = graph.findVertex(info);
 }
 
+bool CentralManager::hasSubmission(const int id) const {
+    return submissions.find(id) != submissions.end();
+}
+
+
 void CentralManager::addReviewer(const int id, const NodeInfo& info) {
     // 1. Inserir o nó fisicamente no Grafo
     graph.addVertex(info);
@@ -75,6 +92,9 @@ void CentralManager::addReviewer(const int id, const NodeInfo& info) {
     reviewers[id] = graph.findVertex(info);
 }
 
+bool CentralManager::hasReviewer(const int id) const {
+    return reviewers.find(id) != reviewers.end();
+}
 
 const std::unordered_map<int, Vertex<NodeInfo>*>& CentralManager::getSubmissions() const {
     return this->submissions;

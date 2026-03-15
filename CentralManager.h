@@ -65,10 +65,12 @@ private:
     std::string outputFilename;
 
 public:
-
+    bool loadFiles(const std::string& filename);
 /**Subsets*/
     void addSubmission(int id, const NodeInfo& info);
     void addReviewer(int id, const NodeInfo& info);
+    bool hasSubmission(int id) const;
+    bool hasReviewer(int id) const;
     const std::unordered_map<int, Vertex<NodeInfo>*>& getSubmissions() const;
     const std::unordered_map<int, Vertex<NodeInfo>*>& getReviewers() const;
 
