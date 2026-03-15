@@ -1,4 +1,57 @@
 #include "CentralManager.h"
+#include "MaxFlow.h"
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+
+void CentralManager::buildPrimaryOnlyNetwork(
+    Graph<NodeInfo>& network,
+    std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
+    std::unordered_map<int, Vertex<NodeInfo>*>& netRevs,
+    Vertex<NodeInfo>*& source,
+    Vertex<NodeInfo>*& sink,
+    int excludedReviewerId
+) const {
+    NodeInfo src{NodeType::source, -1, -1, -1, "", "", "", ""};
+    NodeInfo snk{NodeType::sink, -2, -1, -1, "", "", "", ""};
+
+    network.addVertex(src);
+    network.addVertex(snk);
+
+    source = network.findVertex(src);
+    sink = network.findVertex(snk);
+
+    for (const auto& [id, v] : reviewers) {
+        if (id == excludedReviewerId) continue;
+
+        NodeInfo info = v->getInfo();
+        network.addVertex(info);
+        netRevs[id] = network.findVertex(info);
+    }
+
+    for (const auto& [id, v] : submissions) {
+        NodeInfo info = v->getInfo();
+        network.addVertex(info);
+        netSubs[id] = network.findVertex(info);
+    }
+
+    for (const auto& [rid, rv] : netRevs) {
+        MaxFlow::addResidualEdge(source, rv, maxReviewsPerReviewer);
+    }
+
+    for (const auto& [rid, rv] : netRevs) {
+        for (const auto& [sid, sv] : netSubs) {
+            if (rv->getInfo().primaryDomain == sv->getInfo().primaryDomain) {
+                MaxFlow::addResidualEdge(rv, sv, 1);
+            }
+        }
+    }
+
+    for (const auto& [sid, sv] : netSubs) {
+        MaxFlow::addResidualEdge(sv, sink, minReviewsPerSubmission);
+    }
+}
+
 /**SubSets*/
 void CentralManager::addSubmission(const int id, const NodeInfo& info) {
     // 1. Inserir o nó fisicamente no Grafo

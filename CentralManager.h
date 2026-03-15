@@ -8,6 +8,26 @@
 class CentralManager {
 private:
 
+    void buildPrimaryOnlyNetwork(
+        Graph<NodeInfo>& network,
+        std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
+        std::unordered_map<int, Vertex<NodeInfo>*>& netRevs,
+        Vertex<NodeInfo>*& source,
+        Vertex<NodeInfo>*& sink,
+        int excludeReviewerId = -1
+    ) const;
+
+    std::vector<std::tuple<int,int,int>> extractAssignement(
+        const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs
+    ) const;
+
+    std::vector<std::tuple<int,int,int>> extractMissingReviews(
+        const std::unordered_map<int, Vertex<NodeInfo>*>& netSubs
+    ) const;
+
+    std::vector <std::tuple<int,int,int>> lastAssignments; // submissionId, reviewerId, matchDomain
+    std::vector <std::tuple<int,int,int>> lastMissing; // submissionId, domain, missingReviews
+
     //Graph and Sets.
     Graph<NodeInfo> graph;
 
@@ -65,5 +85,15 @@ public:
     void setGenerateAssignments(int gen);
     void setRiskAnalysis(int risk);
     void setOutputFilename(const std::string& name);
+
+    void showSubmissions() const;
+    void showReviewers() const;
+    void showParameters() const;
+
+    bool runPrimaryOnlyAssigment();
+    std::vector<int> evaluateRiskone() const;
+
+    bool writeAssignementOutput(const std::string& filename) const;
+    bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
 };
 
