@@ -4,6 +4,7 @@
 #include "DataEntities.h"
 #include <unordered_map>
 #include <string>
+#include <iostream>
 
 class CentralManager {
 private:
@@ -22,7 +23,7 @@ private:
         int excludeReviewerId = -1
     ) const;
 
-    /* 
+    /*
     Reads the flow values on reviewer-to-submission edges and keeps the matches
     with positive flow.
     */
@@ -123,5 +124,9 @@ public:
 
     //Writes the result of the risk analysis to an output file.
     bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
+
+    // Tarefa 1.1 - tipos de menus
+    void runInteractiveMenu();
+    void runBatchMode(const std::string & string, const std::string & risk_file);
 };
 

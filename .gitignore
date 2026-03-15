@@ -1,7 +1,6 @@
-
 # IDE files
 .idea/
-
+*.iml
 # Build folders
 build/
 cmake-build-*/
@@ -13,6 +12,7 @@ cmake-build-*/
 main
 *.out
 *.exe
+project
 
 # CMake generated files
 CMakeFiles/
