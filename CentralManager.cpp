@@ -58,7 +58,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
         MaxFlow::addResidualEdge(sv, sink, minReviewsPerSubmission);
     }
 }
-
+/**Caller to LoadFiles*/
 bool CentralManager::loadFiles(const std::string &filename) {
     Parser parser(*this);
 
