@@ -26,12 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd38265c-e5f2-4f19-8b60-95ab86c1654a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dataset1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CentralManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="dd38265c-e5f2-4f19-8b60-95ab86c1654a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +66,7 @@
     "RunOnceActivity.west.config.association.type.startup.service": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "martim",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/martim_leme/Documentos/Faculdade/ano2/DA/project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

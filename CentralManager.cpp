@@ -189,7 +189,9 @@ void CentralManager::runInteractiveMenu() {
 
                 std::cout << "Select input filename: ";
                 std::cin >> filename;
-                loadFiles(filename);
+                if (!loadFiles(filename)) {
+                    std::cout << "Error: Could not load file " << filename << "\n";
+                }
                 break;
 
             case 2:
