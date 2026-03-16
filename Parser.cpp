@@ -53,6 +53,7 @@ bool Parser::loadData(const std::string& filename) {
         else {parseControlLine(line);}
     }
     file.close();
+    std::cout << "finished loadData\n";
     return true;
 }
 void Parser::parseSubmissionLine(const std::string& line) {

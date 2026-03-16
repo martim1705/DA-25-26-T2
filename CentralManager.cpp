@@ -168,17 +168,17 @@ void CentralManager::runInteractiveMenu() {
         std::cout << "\t1 - Load input file\t\n";
         std::cout << "\t2 - Show submissions\t\n";
         std::cout << "\t3 - Show reviewers\t\n";
-        std::cout << "\t4 - Load input file\t\n";
-        std::cout << "\t5 - Show submissions\t\n";
-        std::cout << "\t6 - Show reviewers\t\n";
-        std::cout << "\t7 - Load input file\t\n";
-        std::cout << "\t8 - Show submissions\t\n";
+        std::cout << "\t4 - Show parameters\t\n";
+        std::cout << "\t5 - Run Assignment Algorithm\t\n";
+        std::cout << "\t6 - Run Risk Analysis\t\n";
+        std::cout << "\t7 - Export Results\t\n";
         std::cout << "\t0 - Exit\t";
 
         std::cout << "\n------------------------------------\n";
         std::cout << "Operation: ";
         std::cin >> op;
 
+        std::string filename;
         switch(op) {
 
             case 0:
@@ -186,6 +186,10 @@ void CentralManager::runInteractiveMenu() {
                 break;
 
             case 1:
+
+                std::cout << "Select input filename: ";
+                std::cin >> filename;
+                loadFiles(filename);
                 break;
 
             case 2:

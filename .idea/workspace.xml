@@ -27,51 +27,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd38265c-e5f2-4f19-8b60-95ab86c1654a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeCache.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CMakeCCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CMakeCXXCompiler.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CMakeSystem.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CompilerIdC/CMakeCCompilerId.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CompilerIdC/a.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/3.28.3/CompilerIdCXX/a.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/Makefile2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/cmake.check_cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/progress.marks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/CentralManager.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/CentralManager.cpp.o.d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/DependInfo.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/MaxFlow.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/MaxFlow.cpp.o.d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/Parser.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/Parser.cpp.o.d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/build.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/cmake_clean.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/compiler_depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/compiler_depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/compiler_depend.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/flags.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/link.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/main.cpp.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/main.cpp.o.d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/progress.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/cmake_install.cmake" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/dataset1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CentralManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CentralManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Parser.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +58,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "CMake Application.project.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.RadMigrateCodeStyle": "true",
@@ -111,7 +71,8 @@
     "RunOnceActivity.west.config.association.type.startup.service": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "Merging main",
+    "git-widget-placeholder": "martim",
+    "last_opened_file_path": "/home/martim_leme/Documentos/Faculdade/ano2/DA/project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -122,13 +83,17 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/build" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DA-25-26-T2" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DA-25-26-T2" RUN_TARGET_NAME="project">
+    <configuration name="project" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DA-25-26-T2" TARGET_NAME="project" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DA-25-26-T2" RUN_TARGET_NAME="project">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
