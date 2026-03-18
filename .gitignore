@@ -1,6 +1,7 @@
 # IDE files
 .idea/
 *.iml
+*.xml
 # Build folders
 build/
 cmake-build-*/

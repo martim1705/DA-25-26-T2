@@ -129,6 +129,6 @@ public:
 
     // Tarefa 1.1 - tipos de menus
     void runInteractiveMenu();
-    void runBatchMode(const std::string & string, const std::string & risk_file);
+    void runBatchMode(const std::string & input_file, const std::string & risk_file);
 };
 

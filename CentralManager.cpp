@@ -152,8 +152,16 @@ void CentralManager::setOutputFilename(const std::string& name) {
 
 
 // Menus
-void CentralManager::runBatchMode(const std::string &string, const std::string &risk_file) {
+void CentralManager::runBatchMode(const std::string &input_file, const std::string &risk_file) {
     std::cout << "Batch Mode\n";
+    if (!loadFiles("../input/" + input_file)) {
+        std::cout << "Error: loadFiles() error on file: " << input_file << "\n";
+        return;
+    }
+    else {
+        std::cout << "Done\n";
+    }
+
 }
 
 
@@ -189,7 +197,7 @@ void CentralManager::runInteractiveMenu() {
 
                 std::cout << "Select input filename: ";
                 std::cin >> filename;
-                if (!loadFiles(filename)) {
+                if (!loadFiles("./input/" + filename)) {
                     std::cout << "Error: Could not load file " << filename << "\n";
                 }
                 break;
