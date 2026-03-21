@@ -642,6 +642,8 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.h \
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/DataEntities.h \
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Graph.h \
+  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.h \
+  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Parser.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
