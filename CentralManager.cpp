@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+
+
 void CentralManager::buildPrimaryOnlyNetwork(
     Graph<NodeInfo>& network,
     std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
@@ -31,7 +33,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
         network.addVertex(info);
         netRevs[id] = network.findVertex(info);
     }
-
+    //std::cout << "first for loop passed...\n";
     // Add submission vertices to the flow network.
     for (const auto& [id, v] : submissions) {
         NodeInfo info = v->getInfo();
@@ -61,12 +63,11 @@ void CentralManager::buildPrimaryOnlyNetwork(
 /**Caller to LoadFiles*/
 bool CentralManager::loadFiles(const std::string &filename) {
     Parser parser(*this);
-
     const bool success = parser.loadData(filename);
     if (!success) {
         std::cerr<<"Error: CentralManager Failed to Load Data from"<< filename<<"\n"<<std::endl;
     }
-
+    std::cout << "loadFiles() passed.\n"; // correto. erro não é aqui
     return success;
 
 }
@@ -158,11 +159,10 @@ void CentralManager::runBatchMode(const std::string &input_file, const std::stri
         std::cout << "Error: loadFiles() error on file: " << input_file << "\n";
         return;
     }
-    else {
-        std::cout << "Done\n";
-    }
+    std::cout << "Done\n";
 
 }
+// teste
 
 
 
@@ -199,9 +199,33 @@ void CentralManager::runInteractiveMenu() {
                 std::cin >> filename;
                 if (!loadFiles("./input/" + filename)) {
                     std::cout << "Error: Could not load file " << filename << "\n";
+                    break;
                 }
-                break;
+                auto* network = new Graph<NodeInfo>();
+                std::unordered_map<int, Vertex<NodeInfo>*> netSubs;
+                std::unordered_map<int, Vertex<NodeInfo>*> netRevs;
+                Vertex<NodeInfo>* source;
+                Vertex<NodeInfo>* sink;
+                int excludedReviewerId = 0;
 
+                //std::cout << "Starting buildPrimaryOnlyNetwork()...\n";
+                std::cout << network << "\n";
+                buildPrimaryOnlyNetwork(*network,netSubs,netRevs,source, sink,excludedReviewerId);
+                if (GenerateAssignments != 0) { // Extract assignments
+                    std::cout << "GenerateAssignments = " << GenerateAssignments << "\n";
+                    MaxFlow::edmondsKarp(*network,source,sink);
+                    printNetwork(*network);
+                    delete network;
+                    break;
+                }
+
+                //std::cout << "buildPrimaryOnlyNetwork() passed.\n";
+                MaxFlow::edmondsKarp(*network,source,sink);
+                printNetwork(*network);
+                std::cout << "DONE!\n";
+                delete network;
+                break;
+/*
             case 2:
                 break;
 
@@ -226,6 +250,57 @@ void CentralManager::runInteractiveMenu() {
             default:
 
                 std::cout << "Operation unavailable\n";
+                */
         }
     }
+}
+
+// Usada para testar apenas. Verificar se existe nó source e sink
+void CentralManager::printNetwork(Graph<NodeInfo>& network) const {
+    for (auto v : network.getVertexSet()) {
+        NodeInfo info = v->getInfo();
+
+        std::cout << "Node ID: " << info.id << " | Type: ";
+
+        if (info.type == NodeType::submission) std::cout << "Submission";
+        else if (info.type == NodeType::reviewer) std::cout << "Reviewer";
+        else if (info.type == NodeType::source) std::cout << "Source";
+        else if (info.type == NodeType::sink) std::cout << "Sink";
+
+        std::cout << "\n";
+
+        // Imprimir arestas (se existirem)
+        for (auto e : v->getAdj()) {
+            auto dest = e->getDest()->getInfo();
+
+            std::cout << "   -> " << dest.id
+                      << " (capacidade: " << e->getWeight()
+                      << ", flow: " << e->getFlow() << ")\n";
+        }
+
+        std::cout << "\n";
+    }
+}
+
+
+const std::vector<std::tuple<int,int,int>> extractAssignment(const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs) {
+
+
+    std::vector<std::tuple<int,int,int>> result;
+
+    for (auto [rid, rv] : netRevs) {
+        for (auto e : rv->getAdj()) {
+            if (e->getFlow() > 0) {
+                auto dest = e->getDest()->getInfo();
+                if (dest.type == NodeType::submission) {
+                    int submissionId = dest.id;
+                    int reviewerID = rv->getInfo().id;
+                    int domain = dest.primaryDomain;
+
+                    result.emplace_back(submissionId, reviewerID,domain);
+                }
+            }
+        }
+    }
+    return result;
 }

@@ -27,7 +27,7 @@ private:
     Reads the flow values on reviewer-to-submission edges and keeps the matches
     with positive flow.
     */
-    std::vector<std::tuple<int,int,int>> extractAssignement(
+    std::vector<std::tuple<int,int,int>> extractAssignment(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs
     ) const;
 
@@ -130,5 +130,9 @@ public:
     // Tarefa 1.1 - tipos de menus
     void runInteractiveMenu();
     void runBatchMode(const std::string & input_file, const std::string & risk_file);
+
+
+    void printNetwork(Graph<NodeInfo>& network) const;
+    void generateOutputCSV(const std::string& filename);
 };
 

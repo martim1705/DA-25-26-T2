@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include "CentralManager.h"
+#include  "Parser.h"
+#include "MaxFlow.h"
+#include "Graph.h"
 using namespace std; 
 
 int main(int argc, char* argv[]) { // VOLTAR PARA COLOCAR ERROS DE USO. POR EXEMPLO SE O UTILIZADOR ESCREVER ./myprog -b DEVERIA DAR MENSAGEM DE ERRO EM BATCH MODE?
