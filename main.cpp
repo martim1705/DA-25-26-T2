@@ -1,63 +1,25 @@
 #include <iostream>
-using namespace std; 
+#include <string>
+#include "CentralManager.h"
 
-int main() {
-     
-    int op; 
-    bool running = true;
-    while (running) {
-        
-        cout << "------------------------------------\n";
+// Se houver -b, corre em modo batch; caso contrário abre o menu interativo.
+int main(int argc, char* argv[]) {
+    CentralManager central_manager;
 
-        cout << "\t1 - Load input file\t\n";
-        cout << "\t2 - Show submissions\t\n";
-        cout << "\t3 - Show reviewers\t\n";
-        cout << "\t4 - Load input file\t\n";
-        cout << "\t5 - Show submissions\t\n";
-        cout << "\t6 - Show reviewers\t\n";
-        cout << "\t7 - Load input file\t\n";
-        cout << "\t8 - Show submissions\t\n";
-        cout << "\t0 - Exit\t";
-        
-        cout << "\n------------------------------------\n";
-        cout << "Operation: ";
-        cin >> op;
-
-        switch(op) {
-
-            case 0:
-                running = false;
-                break;
-            
-            case 1:
-                break;
-            
-            case 2:
-                break;
-            
-            case 3:
-                break;
-            
-            case 4:
-                break;
-            
-            case 5:
-                break;
-            
-            case 6:
-                break;
-            
-            case 7:
-                break;
-            
-            case 8:
-                break;
-
-            default:
-
-                cout << "Operation unavailable\n";
+    if (argc >= 3 && std::string(argv[1]) == "-b") {
+        const std::string inputFile = argv[2];
+        std::string riskFile = "";
+        if (argc == 4) {
+            riskFile = argv[3];
         }
+        // O modo batch usa o ficheiro de input e, opcionalmente, um ficheiro para risco.
+        central_manager.runBatchMode(inputFile, riskFile);
+        std::cout << "Program finished.\n";
+    }
+    else {
+        central_manager.runInteractiveMenu();
+        std::cout << "Program finished.\n";
     }
 
-    return 0; 
+    return 0;
 }
