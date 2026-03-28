@@ -33,7 +33,7 @@ void Parser::trim(std::string& str) {
 
 // Lê o ficheiro CSV por secções e envia cada linha para o parser adequado.
 bool Parser::loadData(const std::string& filename) {
-    //teste csv
+    //testa tipo de ficheiro == csv ?
     if (filename.length()<4||filename.substr(filename.length()-4)!=".csv") {
         std::cerr<<"Error: filename must be a valid csv file"<<std::endl;
         return false;
@@ -44,6 +44,9 @@ bool Parser::loadData(const std::string& filename) {
         std::cerr<<"Error: could not open file "<<filename<<std::endl;
         return false;
     }
+
+    //Limpa possíveis dados antigos
+    manager.clearData();
 
     std::string line;
 
@@ -72,7 +75,7 @@ bool Parser::loadData(const std::string& filename) {
         else {parseControlLine(line);}
     }
     file.close();
-    std::cout << "finished loadData\n";
+    //std::cout << "finished loadData\n";
     return true;
 }
 

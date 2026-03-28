@@ -106,6 +106,9 @@ template <class T>
 class Graph {
 public:
     ~Graph();
+    //needed to add a clear function - Joao Leppanen
+    void clear();
+
     /*
     * Auxiliary function to find a vertex with a given the content.
     */
@@ -431,6 +434,29 @@ bool Graph<T>::removeVertex(const T &in) {
     }
     return false;
 }
+
+
+/*
+ * Clears the graph by deleting all vertices, edges, and matrices. -Joao Leppanen
+ */
+template <class T>
+void Graph<T>::clear() {
+    // Delete the matrices first while we still know the original vertexSet.size()
+    deleteMatrix(distMatrix, vertexSet.size());
+    deleteMatrix(pathMatrix, vertexSet.size());
+    distMatrix = nullptr;
+    pathMatrix = nullptr;
+
+    // Delete all edges and vertices
+    for (auto v : vertexSet) {
+        v->removeOutgoingEdges();
+        delete v;
+    }
+
+    // Empty the vector
+    vertexSet.clear();
+}
+
 
 /*
  * Adds an edge to a graph (this), given the contents of the source and

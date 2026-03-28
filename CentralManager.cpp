@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 
+
 namespace {
     // Junta os IDs numa única string para mostrar ou escrever no ficheiro de risco.
     std::string joinReviewerIds(const std::vector<int>& reviewerIds) {
@@ -88,9 +89,9 @@ bool CentralManager::loadFiles(const std::string &filename) {
     Parser parser(*this);
     const bool success = parser.loadData(filename);
     if (!success) {
-        std::cerr<<"Error: CentralManager Failed to Load Data from"<< filename<<"\n"<<std::endl;
+        std::cerr<<"Error: CentralManager Failed to Load Data from: "<< filename<<"\n"<<std::endl;
     }
-    std::cout << "loadFiles() passed.\n"; // correto. erro não é aqui
+    //std::cout << "loadFiles() passed.\n"; // correto. erro não é aqui
     return success;
 
 }
@@ -173,11 +174,27 @@ void CentralManager::setOutputFilename(const std::string& name) {
     this->outputFilename = name;
 }
 
+//Clears All Data to prepare for new Data File for a new Graph
+void CentralManager::clearData() {
+    // 1. Clear the maps holding the pointers
+    submissions.clear();
+    reviewers.clear();
+
+    // 2. Reset the assignment state variables
+    lastAssignments.clear();
+    lastMissing.clear();
+    hasAssignmentRun = false;
+
+    // 3. Clear the main graph
+    graph.clear();
+}
+
+
 // Executa o fluxo completo sem interação: carregar, atribuir e exportar.
 void CentralManager::runBatchMode(const std::string &input_file, const std::string &risk_file) {
     std::cout << "Batch Mode\n";
     if (!loadFiles("../input/" + input_file)) {
-        std::cout << "Error: loadFiles() error on file: " << input_file << "\n";
+        std::cerr << "Error: loadFiles() error on file: " << input_file << "\n";
         return;
     }
 
@@ -207,11 +224,18 @@ void CentralManager::runBatchMode(const std::string &input_file, const std::stri
 void CentralManager::runInteractiveMenu() {
     int op;
     bool running = true;
+    bool isFileLoaded = false;
+    std::string filename;
     while (running) {
-
         std::cout << "------------------------------------\n";
-
-        std::cout << "\t1 - Load input file\t\n";
+        std::cout << "Choose an option by number:\n";
+        std::cout << "------------------------------------\n";
+        if (!isFileLoaded) {
+            std::cout << "\t1 - Load input file\t\n";
+        }
+        else {
+            std::cout << "\t1 - Reload a new input file, \""<< filename <<"\" is loaded.\t\n";
+        }
         std::cout << "\t2 - Show submissions\t\n";
         std::cout << "\t3 - Show reviewers\t\n";
         std::cout << "\t4 - Show parameters\t\n";
@@ -222,9 +246,8 @@ void CentralManager::runInteractiveMenu() {
 
         std::cout << "\n------------------------------------\n";
         std::cout << "Operation: ";
-        std::cin >> op;
 
-        std::string filename;
+        std::cin >> op;
 
         // Cada opção do menu chama diretamente uma funcionalidade do gestor central.
         switch(op) {
@@ -236,10 +259,12 @@ void CentralManager::runInteractiveMenu() {
                 std::cout << "Select input filename: ";
                 std::cin >> filename;
                 if (!loadFiles("./input/" + filename)) {
-                    std::cout << "Error: Could not load file " << filename << "\n";
+                    std::cout << "Error: Could not load file: \"" << filename << "\"!\n";
+                    std::cout << "Make sure the .csv file is in inside the input folder.\n";
                 }
                 else {
-                    std::cout << "Input file loaded successfully.\n";
+                    isFileLoaded=true;
+                    std::cout<<"File: \"" << filename<<"\" loaded successfully.\n\n";
                 }
                 break;
 
@@ -295,8 +320,14 @@ void CentralManager::runInteractiveMenu() {
                 }
                 else {
                     std::string outName;
-                    std::cout << "Output filename: ";
-                    std::cin >> outName;
+
+                    // Clear the leftover newline from the buffer
+                    std::cin.ignore(10000, '\n');
+
+                    std::cout << "Output filename (press Enter for default): ";
+                    std::getline(std::cin, outName);
+
+                    // outName will naturally be an empty string if you just press Enter
                     if (writeAssignementOutput(outName)) {
                         std::cout << "Results exported successfully.\n";
                     }
@@ -554,7 +585,8 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
         return false;
     }
 
-    const std::string finalName = filename.empty() ? outputFilename : filename;
+    const std::string baseName = filename.empty() ? outputFilename : filename;
+    const std::string finalName = "./output/" + baseName;
     std::ofstream out(finalName.c_str());
     if (!out.is_open()) {
         std::cerr << "Error: could not open output file " << finalName << "\n";
@@ -599,7 +631,7 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
         std::vector<std::tuple<int,int,int>> missing = lastMissing;
         std::sort(missing.begin(), missing.end());
 
-        out << "#SubmissionId,Domain,MissingReviews\n";
+        out << "#SubmissionId,Domain,MissingReviews:\n";
         for (std::size_t i = 0; i < missing.size(); ++i) {
             out << std::get<0>(missing[i]) << ", "
                 << std::get<1>(missing[i]) << ", "
@@ -612,7 +644,9 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
 
 // Escreve os reviewers cuja remoção compromete a viabilidade do assignment.
 bool CentralManager::writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const {
-    const std::string finalName = filename.empty() ? "risk.csv" : filename;
+
+    const std::string baseName = filename.empty() ? "risk.csv" : filename;
+    const std::string finalName = "./output/" + baseName;
 
     std::ofstream out(finalName.c_str());
     if (!out.is_open()) {

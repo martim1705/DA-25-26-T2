@@ -72,6 +72,10 @@ private:
 
 public:
     bool loadFiles(const std::string& filename);
+    // Clear current data.
+    void clearData();
+
+
 /**Subsets*/
     void addSubmission(int id, const NodeInfo& info);
     void addReviewer(int id, const NodeInfo& info);
