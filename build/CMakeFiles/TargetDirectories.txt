@@ -1,3 +1,3 @@
-/home/martim_leme/Documentos/Faculdade/ano2/DA/project/build/CMakeFiles/project.dir
-/home/martim_leme/Documentos/Faculdade/ano2/DA/project/build/CMakeFiles/edit_cache.dir
-/home/martim_leme/Documentos/Faculdade/ano2/DA/project/build/CMakeFiles/rebuild_cache.dir
+C:/Users/artur/Desktop/DA-25-26-T2/build/CMakeFiles/project.dir
+C:/Users/artur/Desktop/DA-25-26-T2/build/CMakeFiles/edit_cache.dir
+C:/Users/artur/Desktop/DA-25-26-T2/build/CMakeFiles/rebuild_cache.dir

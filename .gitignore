@@ -2,12 +2,16 @@
 .idea/
 *.iml
 *.xml
+
 # Build folders
 build/
 cmake-build-*/
 
 # Object files
 *.o
+
+#output folders
+output/
 
 # Executables
 main

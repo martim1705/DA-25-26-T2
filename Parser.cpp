@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <bits/locale_facets_nonio.h>
 
 #include "CentralManager.h"
 

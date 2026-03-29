@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.cpp" "CMakeFiles/project.dir/CentralManager.cpp.o" "gcc" "CMakeFiles/project.dir/CentralManager.cpp.o.d"
-  "/home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.cpp" "CMakeFiles/project.dir/MaxFlow.cpp.o" "gcc" "CMakeFiles/project.dir/MaxFlow.cpp.o.d"
-  "/home/martim_leme/Documentos/Faculdade/ano2/DA/project/Parser.cpp" "CMakeFiles/project.dir/Parser.cpp.o" "gcc" "CMakeFiles/project.dir/Parser.cpp.o.d"
-  "/home/martim_leme/Documentos/Faculdade/ano2/DA/project/main.cpp" "CMakeFiles/project.dir/main.cpp.o" "gcc" "CMakeFiles/project.dir/main.cpp.o.d"
+  "C:/Users/artur/Desktop/DA-25-26-T2/CentralManager.cpp" "CMakeFiles/project.dir/CentralManager.cpp.obj" "msvc" "CMakeFiles/project.dir/CentralManager.cpp.obj.d"
+  "C:/Users/artur/Desktop/DA-25-26-T2/MaxFlow.cpp" "CMakeFiles/project.dir/MaxFlow.cpp.obj" "msvc" "CMakeFiles/project.dir/MaxFlow.cpp.obj.d"
+  "C:/Users/artur/Desktop/DA-25-26-T2/Parser.cpp" "CMakeFiles/project.dir/Parser.cpp.obj" "msvc" "CMakeFiles/project.dir/Parser.cpp.obj.d"
+  "C:/Users/artur/Desktop/DA-25-26-T2/main.cpp" "CMakeFiles/project.dir/main.cpp.obj" "msvc" "CMakeFiles/project.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

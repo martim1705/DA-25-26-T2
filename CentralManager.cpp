@@ -338,13 +338,13 @@ void CentralManager::runInteractiveMenu() {
 
                     // outName will naturally be an empty string if you just press Enter
                     if (writeAssignementOutput(outName)) {
-                        std::cout << "Results exported successfully.\n";
+                        std::cout << "Assignment results exported successfully.\n";
                     }
 
                     if (RiskAnalysis == 1) {
                         std::vector<int> risky = evaluateRiskone();
-                        if (writeRiskOutput(outputFilename, risky)) {
-                            std::cout << "Risk analysis written to " << outputFilename << "\n";
+                        if (writeRiskOutput(outName, risky)) {
+                            std::cout << "Risk analysis written to " << outName << "\n";
                         }
                     }
                 }
