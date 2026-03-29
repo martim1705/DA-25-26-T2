@@ -25,7 +25,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
     std::unordered_map<int, Vertex<NodeInfo>*>& netRevs,
     Vertex<NodeInfo>*& source,
     Vertex<NodeInfo>*& sink,
-    int excludedReviewerId
+    int excludeReviewerId
 ) const {
     // Create source and sink nodes for the flow network.
     NodeInfo src{NodeType::source, -1, -1, -1, "", "", "", ""};
@@ -43,7 +43,7 @@ void CentralManager::buildPrimaryOnlyNetwork(
         int id = itReviewer->first;
         Vertex<NodeInfo>* v = itReviewer->second;
 
-        if (id == excludedReviewerId) continue;
+        if (id == excludeReviewerId) continue;
 
         NodeInfo info = v->getInfo();
         network.addVertex(info);
@@ -191,17 +191,27 @@ void CentralManager::clearData() {
 
 
 // Executa o fluxo completo sem interação: carregar, atribuir e exportar.
-void CentralManager::runBatchMode(const std::string &input_file, const std::string &risk_file) {
+void CentralManager::runBatchMode(const std::string &input_file, const std::string &output_file) {
     std::cout << "Batch Mode\n";
-    if (!loadFiles("../input/" + input_file)) {
-        std::cerr << "Error: loadFiles() error on file: " << input_file << "\n";
+    //Removi a imposição da pasta input, em batch mode.
+    if (!loadFiles(input_file)) {
         return;
     }
+
+    //Ignorar os output files dentro dos .csv, o commando é rei e senhor!
+    if (!output_file.empty()) {
+        outputFilename = output_file;
+    }
+
 
     // Corre primeiro o assignment principal antes de qualquer análise extra.
     const bool feasible = runPrimaryOnlyAssigment();
 
     if (GenerateAssignments != 0 || !feasible) {
+        //Por estar a usar modo append é preciso limpar o ficheiro, se o ficheiro já existir
+        std::ofstream clearFile("./output/"+ outputFilename);
+        clearFile.close();
+
         if (writeAssignementOutput(outputFilename)) {
            std::cout << "Assignment output written to " << outputFilename << "\n";
         }
@@ -210,9 +220,8 @@ void CentralManager::runBatchMode(const std::string &input_file, const std::stri
     // A análise de risco só é feita para o caso K = 1.
     if (RiskAnalysis == 1) {
         std::vector<int> risky = evaluateRiskone();
-        const std::string riskOutput = risk_file.empty() ? "risk.csv" : risk_file;
-        if (writeRiskOutput(riskOutput, risky)) {
-            std::cout << "Risk analysis written to " << riskOutput << "\n";
+        if (writeRiskOutput(outputFilename, risky)) {
+            std::cout << "Risk analysis written to " << outputFilename << "\n";
     }
 }
     std::cout << "Done\n";
@@ -538,7 +547,6 @@ bool CentralManager::runPrimaryOnlyAssigment() {
 
     return lastRunFeasible;
 }
-
 // Um reviewer é de risco se, ao removê-lo, o assignment deixar de ser viável.
 std::vector<int> CentralManager::evaluateRiskone() const {
     std::vector<int> risky;
@@ -631,7 +639,7 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
         std::vector<std::tuple<int,int,int>> missing = lastMissing;
         std::sort(missing.begin(), missing.end());
 
-        out << "#SubmissionId,Domain,MissingReviews:\n";
+        out << "#SubmissionId,Domain,MissingReviews\n";
         for (std::size_t i = 0; i < missing.size(); ++i) {
             out << std::get<0>(missing[i]) << ", "
                 << std::get<1>(missing[i]) << ", "
@@ -648,7 +656,7 @@ bool CentralManager::writeRiskOutput(const std::string& filename, const std::vec
     const std::string baseName = filename.empty() ? "risk.csv" : filename;
     const std::string finalName = "./output/" + baseName;
 
-    std::ofstream out(finalName.c_str());
+    std::ofstream out(finalName.c_str(), std::ios::app);//mode append
     if (!out.is_open()) {
         std::cerr << "Error: could not open risk output file " << finalName << "\n";
         return false;

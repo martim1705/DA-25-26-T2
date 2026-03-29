@@ -63,10 +63,13 @@ bool Parser::loadData(const std::string& filename) {
         if (line.find("#Parameters") == 0) { section=3; continue;}
         if (line.find("#Control") == 0) { section=4; continue;}
 
-        /**Dúvida vamos ter que testar comentários a meio das linhas?*/
-
-        //Ignore all after #
-        if (line.find('#')!=std::string::npos){ continue;}
+        // Strip out inline comments
+       const size_t commentPos = line.find('#');
+        if (commentPos != std::string::npos) {
+            line = line.substr(0, commentPos);
+            trim(line);
+            if (line.empty()) continue;
+        }
 
         if (section==0) {continue;}
         if (section==1) {parseSubmissionLine(line);}
