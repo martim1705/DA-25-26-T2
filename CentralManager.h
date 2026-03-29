@@ -4,7 +4,6 @@
 #include "DataEntities.h"
 #include <unordered_map>
 #include <string>
-#include <iostream>
 #include <vector>
 #include <tuple>
 
@@ -52,22 +51,25 @@ private:
         const std::unordered_map<int, Vertex<NodeInfo>*>& netSubs
     ) const;
 
+    /**
+     * @brief retorna vetor de (submissionId, reviewerId, matchDomain)
+     */
     std::vector <std::tuple<int,int,int>> lastAssignments; // submissionId, reviewerId, matchDomain
+
+    /**
+     * @brief retorna vetor de (submissionId, domain, missingReviews)
+     */
     std::vector <std::tuple<int,int,int>> lastMissing; // submissionId, domain, missingReviews
     bool hasAssignmentRun = false;
     bool lastRunFeasible = false;
 
-    //Grafos e Conjuntos.
+
     Graph<NodeInfo> graph;
 
-    //Usar como atalho para iterar só sobre subgrupos
-    //ESCOLHI USAR UNMAPPED PARA SER MAIS RAPIDA A CONSTRUÇÃO DO GRAPH,
-    //MAS OBRIGA A USAR UM SORT NO MENU AO EXPOR
-    //(Escolhi assim porque acaba por ser mais eficiente em batch, mas podemos usar map)
     std::unordered_map<int,Vertex<NodeInfo>*> submissions;
     std::unordered_map<int,Vertex<NodeInfo>*> reviewers;
 
-    //Parameters
+
     int minReviewsPerSubmission = 0;
     int maxReviewsPerReviewer = 0;
     bool primaryReviewerExpertise = false; //Connect using primaryReviewerExpertise?
@@ -88,42 +90,144 @@ public:
 
 
 /**Subsets*/
+    /**
+     *@brief Adiciona a informação da submissão identifica com um id ao grafo
+     * @param id identificador da submissão
+     * @param info informação acerca da submissão
+     */
     void addSubmission(int id, const NodeInfo& info);
+
+    /**
+     *@brief Adiciona a informação do revisor identifica com um id ao grafo
+     * @param id identificador do revisor
+     * @param info informação acerca do revisor
+     */
     void addReviewer(int id, const NodeInfo& info);
+
+    /**
+     * @brief Verifica se existe uma submissão com o ID especificado.
+     *
+     * @param id identificador de submissão
+     * @return bool retorna verdadeiro se a submissão estiver presente no unordered_map submissions
+     */
     bool hasSubmission(int id) const;
+    /**
+     *
+     * @brief Verifica se existe um revisor com o ID especificado.
+     *
+     * @param id identificador de revisor
+     * @return bool retorna verdadeiro se o revisor estiver presente no unordered_map reviewers
+     */
     bool hasReviewer(int id) const;
+
+    /**
+     *
+     * @return std::unordered_map<int, Vertex<NodeInfo>*>& Retorna um mapa de (id, Vertice submissao)
+     */
     const std::unordered_map<int, Vertex<NodeInfo>*>& getSubmissions() const;
+
+    /**
+     *
+     * @return std::unordered_map<int, Vertex<NodeInfo>*>& Retorna um mapa de (id, Vertice revisor)
+     */
     const std::unordered_map<int, Vertex<NodeInfo>*>& getReviewers() const;
 
 /**Parametros*/
+
+    /**
+     * @brief Define o número mínimo de revisões por submissão.
+     *
+     * @param value Número mínimo de revisões.
+     */
     void setMinReviewsPerSubmission(int value);
+
+    /**
+     * @brief Obtém o número mínimo de revisões por submissão
+     * @return int Número mínimo de revisões
+     */
     int getMinReviewsPerSubmission() const;
 
+    /**
+     * @brief Define o número máximo de revisões por revisor.
+     *
+     * @param value Número máximo de revisões.
+     */
     void setMaxReviewsPerReviewer(int value);
+
+    /**
+     * @brief Obtém o número máximo de revisões por revisor.
+     *
+     * @return Número máximo de revisões.
+     */
     int getMaxReviewsPerReviewer() const;
 
-/*Este quatro parecem-me redundantes para lógica***TIRAR DÚVIDA*/
+    /**
+     * @brief Define se a correspondência deve considerar o domínio primário do revisor.
+     *
+     * @param value true para ativar a correspondência pelo domínio primário do revisor,
+     * false caso contrário.
+     */
     void setPrimaryReviewerExpertise(bool value);
-//    bool getPrimaryReviewerExpertise() const;
 
+
+    /**
+     * @brief Define se a correspondência deve considerar o domínio secundário do revisor.
+     *
+     * @param value true para ativar a correspondência pelo domínio secundário do revisor,
+     * false caso contrário.
+     */
     void setSecondaryReviewerExpertise(bool value);
-//    bool getSecondaryReviewerExpertise() const;
 
+
+    /**
+     * @brief Define se a correspondência deve considerar o domínio primário da submissão.
+     *
+     * @param value true para ativar a correspondência pelo domínio primário da submissão,
+     * false caso contrário.
+     */
     void setPrimarySubmissionDomain(bool value);
-//    bool getPrimarySubmissionDomain() const;
 
+
+    /**
+     * @brief Define se a correspondência deve considerar o domínio secundário da submissão.
+     *
+     * @param value true para ativar a correspondência pelo domínio secundário da submissão,
+     * false caso contrário.
+     */
     void setSecondarySubmissionDomain(bool value);
-//    bool getSecondarySubmissionDomain() const;
 
     /**Parametros de Controlo*/
-    //Em princípio não precisam de getters (posso estar errado claro)
-    //porque são utilizados apenas pelo CentralManager
     void setGenerateAssignments(int gen);
     void setRiskAnalysis(int risk);
     void setOutputFilename(const std::string& name);
 
+    /**
+     * @brief Imprime todas as submissões ordenadas por ID
+     *
+     * Extrai os IDs da submissão de um mapa interno para um vetor interno, ordena-os, e imprime as informações das submissões
+     *
+     * Domínios secundários nulos são representados por "-".
+     *
+     * Se nenhuma submissão estiver disponível, uma mensagem de aviso é impressa.
+     */
     void showSubmissions() const;
+
+    /**
+     * @brief Imprime todas os revisores ordenados por ID
+     *
+     * Extrai os IDs do revisor de um mapa interno para um vetor interno, ordena-os, e imprime as informações dos revisores
+     *
+     * Domínios secundários nulos são representados por "-".
+     *
+     * Se nenhum revisor estiver disponível, uma mensagem de aviso é impressa.
+     */
     void showReviewers() const;
+
+
+    /**
+     *
+     * @brief Imprime os valores de variáveis internas à classe CentralManager que correspondem a parâmetros
+     */
     void showParameters() const;
 
 
@@ -146,11 +250,11 @@ public:
     /// @brief Escreve as listas de atribuição com sucesso ou as submissões com revisões em falta.
     bool writeAssignementOutput(const std::string& filename) const;
 
-    //Writes the result of the risk analysis to an output file.
+
     /// @brief Escreve o resultado da análise de risco num ficheiro de output.
     bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
 
-    // Tarefa 1.1 - tipos de menus
+
     void runInteractiveMenu();
     /// @brief Executa o programa em batch Mode
     void runBatchMode(const std::string & input_file, const std::string & risk_file);
