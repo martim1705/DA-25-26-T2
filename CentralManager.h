@@ -32,21 +32,22 @@ private:
         int excludeReviewerId = -1
     ) const;
 
-    /*
-    Reads the flow values on reviewer-to-submission edges and keeps the matches
-    with positive flow.
-    */
-    /// @brief Lê os valores de fluxo nas arestas revisor->submissão e guarda as correspondências com fluxo positivo.
+
+    /** @brief Lê os valores de fluxo nas arestas revisor->submissão e guarda as correspondências com fluxo positivo.
+     * @param netRevs Mapa que liga IDs de revisor aos seus vértices.
+     * @return std::vector<std::tuple<int,int,int>> Vetor de tuplos (submissionId, reviewerId, primaryDomain)
+     */
     std::vector<std::tuple<int,int,int>> extractAssignment(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs
     ) const;
 
-    /*
-    Compares the flow reaching the sink with the required minimum number of reviews
-    for each submission.
-    */
 
-    /// @brief Compara o fluxo que chega ao sink com o número mínimo de revisões exigido para cada submissão.
+    /**
+     * @brief Compara o fluxo que chega ao sink com o número mínimo de revisões exigido para cada submissão.
+     * @param netSubs Mapa que liga IDs de submissão aos seus vértices.
+     * @return std::vector<std::tuple<int,int,int>> Vetor de tuplos (idSubmissao, dominioPrimario, revisoesEmFalta),
+     * ordenados por ordem crescente
+     */
     std::vector<std::tuple<int,int,int>> extractMissingReviews(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netSubs
     ) const;
@@ -56,7 +57,7 @@ private:
     bool hasAssignmentRun = false;
     bool lastRunFeasible = false;
 
-    //Graph and Sets.
+    //Grafos e Conjuntos.
     Graph<NodeInfo> graph;
 
     //Usar como atalho para iterar só sobre subgrupos
@@ -101,7 +102,7 @@ public:
     void setMaxReviewsPerReviewer(int value);
     int getMaxReviewsPerReviewer() const;
 
-/**Este quatro parecem-me redundantes para lógica***TIRAR DÚVIDA****/
+/*Este quatro parecem-me redundantes para lógica***TIRAR DÚVIDA*/
     void setPrimaryReviewerExpertise(bool value);
 //    bool getPrimaryReviewerExpertise() const;
 
@@ -125,10 +126,6 @@ public:
     void showReviewers() const;
     void showParameters() const;
 
-    /*
-    Builds the flow network, computes the maximum flow, and stores the resulting
-    assignments or missing reviews.
-    */
 
     /**
     * @brief Constrói a rede de fluxo, calcula o fluxo máximo e armazena os resultados.
@@ -137,10 +134,6 @@ public:
     */
     bool runPrimaryOnlyAssigment();
 
-    /*
-    A reviewer is considered risky if removing them from the network makes the
-    assignment infeasible.
-    */
 
     /**
      * @brief Avalia quais os revisores que são críticos para a viabilidade da atribuição.
@@ -150,10 +143,6 @@ public:
      */
     std::vector<int> evaluateRiskone() const;
 
-    /*
-    Writes either the successful assignment lists or the list of submissions with
-    missing reviews, depending on the latest execution result.
-    */
     /// @brief Escreve as listas de atribuição com sucesso ou as submissões com revisões em falta.
     bool writeAssignementOutput(const std::string& filename) const;
 

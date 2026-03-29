@@ -28,9 +28,22 @@
   <component name="ChangeListManager">
     <list default="true" id="dd38265c-e5f2-4f19-8b60-95ab86c1654a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CentralManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/project.dir/CentralManager.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/project.dir/CentralManager.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/project" beforeDir="false" afterPath="$PROJECT_DIR$/build/project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CentralManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset12.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset13.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset14.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/output_dataset9.csv" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +89,7 @@
     "RunOnceActivity.west.config.association.type.startup.service": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "martim",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/home/martim_leme/Documentos/Faculdade/ano2/DA/project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
