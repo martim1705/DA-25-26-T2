@@ -340,6 +340,13 @@ void CentralManager::runInteractiveMenu() {
                     if (writeAssignementOutput(outName)) {
                         std::cout << "Results exported successfully.\n";
                     }
+
+                    if (RiskAnalysis == 1) {
+                        std::vector<int> risky = evaluateRiskone();
+                        if (writeRiskOutput(outputFilename, risky)) {
+                            std::cout << "Risk analysis written to " << outputFilename << "\n";
+                        }
+                    }
                 }
                 break;
             }
