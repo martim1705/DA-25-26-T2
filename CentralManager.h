@@ -5,15 +5,24 @@
 #include <unordered_map>
 #include <string>
 #include <iostream>
+#include <vector>
+#include <tuple>
 
+///@brief Gere o fluxo de execução, armazena as entidades de dados e gere os algoritmos de Fluxo Máximo.
 class CentralManager {
 private:
 
-    /*
-    Creates a source node, a sink node, reviewer vertices, and submission vertices.
-    Adds edges from source to reviewers, from reviewers to compatible submissions,
-    and from submissions to sink
-    */
+    /**
+     * @brief Cria um nó fonte, um sumidouro, vértices de revisores e submissões.
+     * Adiciona arestas da fonte para revisores, de revisores para submissões compatíveis, e de submissões para o sumidouro.
+     * @param network O grafo a construir.
+     * @param netSubs Mapa que liga IDs de submissão aos seus vértices.
+     * @param netRevs Mapa que liga IDs de revisor aos seus vértices.
+     * @param source Ponteiro para o vértice fonte gerado.
+     * @param sink Ponteiro para o vértice sumidouro gerado.
+     * @param excludeReviewerId ID de um revisor a excluir (usado na análise de risco).
+     * @note Complexidade Temporal: O(V + E) onde V é o número de submissões e revisores, e E o número de correspondências.
+     */
     void buildPrimaryOnlyNetwork(
         Graph<NodeInfo>& network,
         std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
@@ -27,6 +36,7 @@ private:
     Reads the flow values on reviewer-to-submission edges and keeps the matches
     with positive flow.
     */
+    /// @brief Lê os valores de fluxo nas arestas revisor->submissão e guarda as correspondências com fluxo positivo.
     std::vector<std::tuple<int,int,int>> extractAssignment(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netRevs
     ) const;
@@ -35,12 +45,17 @@ private:
     Compares the flow reaching the sink with the required minimum number of reviews
     for each submission.
     */
+
+    /// @brief Compara o fluxo que chega ao sink com o número mínimo de revisões exigido para cada submissão.
     std::vector<std::tuple<int,int,int>> extractMissingReviews(
         const std::unordered_map<int, Vertex<NodeInfo>*>& netSubs
     ) const;
 
     std::vector <std::tuple<int,int,int>> lastAssignments; // submissionId, reviewerId, matchDomain
     std::vector <std::tuple<int,int,int>> lastMissing; // submissionId, domain, missingReviews
+
+    bool hasAssignmentRun = false;
+    bool lastRunFeasible = false;
 
     //Graph and Sets.
     Graph<NodeInfo> graph;
@@ -66,7 +81,12 @@ private:
     std::string outputFilename;
 
 public:
+    /// @brief Carrega os dados a partir do ficheiro especificado.
     bool loadFiles(const std::string& filename);
+    /// @brief Limpa os dados atuais em memória.
+    void clearData();
+
+
 /**Subsets*/
     void addSubmission(int id, const NodeInfo& info);
     void addReviewer(int id, const NodeInfo& info);
@@ -110,29 +130,47 @@ public:
     Builds the flow network, computes the maximum flow, and stores the resulting
     assignments or missing reviews.
     */
+
+    /**
+    * @brief Constrói a rede de fluxo, calcula o fluxo máximo e armazena os resultados.
+    * @return Verdadeiro se a atribuição for viável, falso caso existam revisões em falta.
+    * @note Complexidade Temporal: Dominada pelo algoritmo de Edmonds-Karp O(V * E^2).
+    */
     bool runPrimaryOnlyAssigment();
 
     /*
     A reviewer is considered risky if removing them from the network makes the
     assignment infeasible.
     */
+
+    /**
+     * @brief Avalia quais os revisores que são críticos para a viabilidade da atribuição.
+     * Um revisor é considerado de risco se a sua remoção tornar a atribuição inviável.
+     * @return Um vetor com os IDs dos revisores de risco.
+     * @note Complexidade Temporal: O(R * V * E^2) onde R é o número de revisores.
+     */
     std::vector<int> evaluateRiskone() const;
 
     /*
     Writes either the successful assignment lists or the list of submissions with
     missing reviews, depending on the latest execution result.
     */
+    /// @brief Escreve as listas de atribuição com sucesso ou as submissões com revisões em falta.
     bool writeAssignementOutput(const std::string& filename) const;
 
     //Writes the result of the risk analysis to an output file.
+    /// @brief Escreve o resultado da análise de risco num ficheiro de output.
     bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
 
     // Tarefa 1.1 - tipos de menus
     void runInteractiveMenu();
+    /// @brief Executa o programa em batch Mode
     void runBatchMode(const std::string & input_file, const std::string & risk_file);
 
-
+    /// @brief Imprime a estrutura da rede na consola para fins de depuração (debug).
     void printNetwork(Graph<NodeInfo>& network) const;
+
+    /// @brief Metodo de compatibilidade para gerar o ficheiro CSV de output final.
     void generateOutputCSV(const std::string& filename);
 };
 

@@ -8,6 +8,22 @@
 
 #include "CentralManager.h"
 
+namespace {
+    // Remove espaços exteriores e aspas, útil para nomes de ficheiro no input.
+    std::string stripQuotesCopy(const std::string& text) {
+        std::string result = text;
+        std::size_t begin = result.find_first_not_of(" \n\t\r");
+        if (begin == std::string::npos) return "";
+        std::size_t end = result.find_last_not_of(" \n\t\r");
+        result = result.substr(begin, end - begin + 1);
+
+        if (result.size() >= 2 && result.front() == '"' && result.back() == '"') {
+            result = result.substr(1, result.size() - 2);
+        }
+        return result;
+    }
+}
+
 void Parser::trim(std::string& str) {
     if (str.empty()) {return;}
     str.erase(0, str.find_first_not_of(" \n\t\r")); //Erase before useful data
@@ -15,8 +31,9 @@ void Parser::trim(std::string& str) {
 
 }
 
+// Lê o ficheiro CSV por secções e envia cada linha para o parser adequado.
 bool Parser::loadData(const std::string& filename) {
-    //teste csv
+    //testa tipo de ficheiro == csv ?
     if (filename.length()<4||filename.substr(filename.length()-4)!=".csv") {
         std::cerr<<"Error: filename must be a valid csv file"<<std::endl;
         return false;
@@ -28,7 +45,12 @@ bool Parser::loadData(const std::string& filename) {
         return false;
     }
 
+    //Limpa possíveis dados antigos
+    manager.clearData();
+
     std::string line;
+
+    // section indica se estamos a ler submissions, reviewers, parameters ou control.
     int section=0;
     while (std::getline(file, line)) {
 
@@ -41,10 +63,13 @@ bool Parser::loadData(const std::string& filename) {
         if (line.find("#Parameters") == 0) { section=3; continue;}
         if (line.find("#Control") == 0) { section=4; continue;}
 
-        /**Dúvida vamos ter que testar comentários a meio das linhas?*/
-
-        //Ignore all after #
-        if (line.find('#')!=std::string::npos){ continue;}
+        // Strip out inline comments
+       const size_t commentPos = line.find('#');
+        if (commentPos != std::string::npos) {
+            line = line.substr(0, commentPos);
+            trim(line);
+            if (line.empty()) continue;
+        }
 
         if (section==0) {continue;}
         if (section==1) {parseSubmissionLine(line);}
@@ -53,9 +78,11 @@ bool Parser::loadData(const std::string& filename) {
         else {parseControlLine(line);}
     }
     file.close();
-    std::cout << "finished loadData\n";
+    //std::cout << "finished loadData\n";
     return true;
 }
+
+// Converte uma linha CSV numa submissão e adiciona-a ao manager.
 void Parser::parseSubmissionLine(const std::string& line) {
     std::stringstream ss(line);
     std::string token;
@@ -68,6 +95,7 @@ void Parser::parseSubmissionLine(const std::string& line) {
     //Entradas no info
     info.id= std::stoi(token);
 
+    // O ID da submissão tem de ser inteiro e único.
     if (manager.hasSubmission(info.id)) {
         std::cerr<<"Error: Repeated ID in submission: "<<info.id<<". Skipping Line."<<std::endl;
         return;
@@ -112,6 +140,7 @@ void Parser::parseSubmissionLine(const std::string& line) {
 
 }
 
+// Converte uma linha CSV num reviewer e adiciona-o ao manager.
 void Parser::parseReviewerLine(const std::string& line) {
     std::stringstream ss(line);
     std::string token;
@@ -162,9 +191,9 @@ void Parser::parseReviewerLine(const std::string& line) {
     }
 
     manager.addReviewer(info.id,info);
-
 }
 
+// Lê parâmetros gerais que influenciam a construção da rede e as restrições.
 void Parser::parseParameterLine(const std::string& line) {
     std::stringstream ss(line);
     std::string key, valueStr;
@@ -177,6 +206,7 @@ void Parser::parseParameterLine(const std::string& line) {
 
     int value=std::stoi(valueStr);
 
+    // Cada chave do input atualiza diretamente o estado do CentralManager.
     if (key=="MinReviewsPerSubmission") {
         manager.setMinReviewsPerSubmission(value);
     }
@@ -198,6 +228,7 @@ void Parser::parseParameterLine(const std::string& line) {
 
 }
 
+// Lê opções de execução, como geração de output e análise de risco.
 void Parser::parseControlLine(const std::string &line) {
     std::stringstream ss(line);
     std::string key,valueStr;
@@ -213,11 +244,14 @@ void Parser::parseControlLine(const std::string &line) {
         const int value=std::stoi(valueStr);
         manager.setGenerateAssignments(value);
     }
+    
     if (key=="RiskAnalysis") {
         const int value=std::stoi(valueStr);
         manager.setRiskAnalysis(value);
     }
+
+    // Remove aspas para evitar criar ficheiros com nome inválido.
     if (key=="OutputFileName") {
-        manager.setOutputFilename(valueStr);
+        manager.setOutputFilename(stripQuotesCopy(valueStr));
     }
 }
