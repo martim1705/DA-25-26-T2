@@ -59,6 +59,7 @@ CMakeFiles/project.dir/CentralManager.cpp.o: /home/martim_leme/Documentos/Faculd
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
@@ -110,6 +111,7 @@ CMakeFiles/project.dir/CentralManager.cpp.o: /home/martim_leme/Documentos/Faculd
   /usr/include/c++/13/new \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/queue \
+  /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
@@ -642,8 +644,6 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.h \
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/DataEntities.h \
   /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Graph.h \
-  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.h \
-  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Parser.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -849,8 +849,6 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h
 
 
-/usr/include/c++/13/sstream:
-
 /usr/include/c++/13/bits/locale_facets_nonio.tcc:
 
 /usr/include/c++/13/bits/locale_facets_nonio.h:
@@ -963,7 +961,13 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 
 /usr/include/stdc-predef.h:
 
-/home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.cpp:
+/usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
+
+/usr/include/sched.h:
+
+/usr/include/pthread.h:
+
+/usr/include/c++/13/cstdlib:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -986,6 +990,8 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Graph.h:
 
 /usr/include/c++/13/bits/locale_classes.tcc:
+
+/usr/include/c++/13/sstream:
 
 /usr/include/c++/13/bits/locale_classes.h:
 
@@ -1018,14 +1024,6 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 /usr/include/c++/13/streambuf:
 
 /usr/include/c++/13/bits/exception.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.h:
-
-/usr/include/c++/13/bits/char_traits.h:
-
-/usr/include/c++/13/bits/hashtable_policy.h:
 
 /usr/include/x86_64-linux-gnu/bits/long-double.h:
 
@@ -1090,6 +1088,16 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/13/bits/basic_ios.h:
+
+/home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/c++/13/bits/char_traits.h:
+
+/usr/include/c++/13/bits/hashtable_policy.h:
+
+/home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.h:
 
 /usr/include/c++/13/bits/exception_defines.h:
 
@@ -1205,9 +1213,9 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 
 /usr/include/c++/13/bits/uniform_int_dist.h:
 
-/usr/include/c++/13/bits/std_abs.h:
-
 /usr/include/c++/13/bits/postypes.h:
+
+/usr/include/c++/13/bits/std_abs.h:
 
 /usr/include/c++/13/bits/uses_allocator.h:
 
@@ -1242,8 +1250,6 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 /usr/include/c++/13/fstream:
 
 /usr/include/c++/13/cstdio:
-
-/usr/include/c++/13/cstdlib:
 
 /usr/include/c++/13/debug/assertions.h:
 
@@ -1292,9 +1298,3 @@ CMakeFiles/project.dir/main.cpp.o: /home/martim_leme/Documentos/Faculdade/ano2/D
 /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/linux/errno.h:
-
-/usr/include/pthread.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h:
-
-/usr/include/sched.h:

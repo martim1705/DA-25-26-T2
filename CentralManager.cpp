@@ -602,7 +602,7 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
     }
 
     // Se a atribuição foi viável, exporta os matches por submissão e por reviewer.
-    if (lastRunFeasible) {
+    //if (lastRunFeasible) {
         std::vector<std::tuple<int,int,int>> bySubmission = lastAssignments;
         std::sort(bySubmission.begin(), bySubmission.end());
 
@@ -632,10 +632,10 @@ bool CentralManager::writeAssignementOutput(const std::string& filename) const {
         }
 
         out << "#Total: " << bySubmission.size() << "\n";
-    }
+    //}
 
     // Caso contrário, exporta apenas as submissões que ficaram com reviews em falta.
-    else {
+    if (!lastRunFeasible) {
         std::vector<std::tuple<int,int,int>> missing = lastMissing;
         std::sort(missing.begin(), missing.end());
 

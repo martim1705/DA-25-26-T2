@@ -60,6 +60,7 @@ CMakeFiles/project.dir/CentralManager.cpp.o
  /usr/include/c++/13/bits/range_access.h
  /usr/include/c++/13/bits/refwrap.h
  /usr/include/c++/13/bits/requires_hosted.h
+ /usr/include/c++/13/bits/sstream.tcc
  /usr/include/c++/13/bits/std_abs.h
  /usr/include/c++/13/bits/stl_algo.h
  /usr/include/c++/13/bits/stl_algobase.h
@@ -111,6 +112,7 @@ CMakeFiles/project.dir/CentralManager.cpp.o
  /usr/include/c++/13/new
  /usr/include/c++/13/ostream
  /usr/include/c++/13/queue
+ /usr/include/c++/13/sstream
  /usr/include/c++/13/stdexcept
  /usr/include/c++/13/streambuf
  /usr/include/c++/13/string
@@ -646,8 +648,6 @@ CMakeFiles/project.dir/main.cpp.o
  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/CentralManager.h
  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/DataEntities.h
  /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Graph.h
- /home/martim_leme/Documentos/Faculdade/ano2/DA/project/MaxFlow.h
- /home/martim_leme/Documentos/Faculdade/ano2/DA/project/Parser.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h

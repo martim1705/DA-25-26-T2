@@ -53,7 +53,6 @@ private:
 
     std::vector <std::tuple<int,int,int>> lastAssignments; // submissionId, reviewerId, matchDomain
     std::vector <std::tuple<int,int,int>> lastMissing; // submissionId, domain, missingReviews
-
     bool hasAssignmentRun = false;
     bool lastRunFeasible = false;
 
