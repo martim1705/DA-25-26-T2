@@ -1,0 +1,528 @@
+\doxysection{Central\+Manager Class Reference}
+\hypertarget{classCentralManager}{}\label{classCentralManager}\index{CentralManager@{CentralManager}}
+
+
+Gere o fluxo de execução, armazena as entidades de dados e gere os algoritmos de Fluxo Máximo.  
+
+
+
+
+{\ttfamily \#include $<$Central\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_aa634a52db204656e0b8c54204e166425}{load\+Files}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{filename}})
+\begin{DoxyCompactList}\small\item\em Carrega os dados a partir do ficheiro especificado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aebd43a7a3922d364fdbb05a510cbc2e4}{clear\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Limpa os dados atuais em memória. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a3c8a8cde8d827ef0a560bf36571be5b2}{add\+Submission}} (\mbox{\hyperlink{classEdge}{int}} id, \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{structNodeInfo}{Node\+Info}} \&info)
+\begin{DoxyCompactList}\small\item\em Adiciona a informação da submissão identificada com um id ao grafo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_ad6a25640a71ed68ea5f926be4d2b0d76}{add\+Reviewer}} (\mbox{\hyperlink{classEdge}{int}} id, \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{structNodeInfo}{Node\+Info}} \&info)
+\begin{DoxyCompactList}\small\item\em Adiciona a informação do revisor identificada com um id ao grafo. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_adceed5758e49582dd2b42a069faca1ed}{has\+Submission}} (\mbox{\hyperlink{classEdge}{int}} id) \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Verifica se existe uma submissão com o ID especificado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_ad9b0951bf8b49db98c17b916831f3589}{has\+Reviewer}} (\mbox{\hyperlink{classEdge}{int}} id) \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Verifica se existe um revisor com o ID especificado. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{classEdge}{int}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classCentralManager_afcb0a63ac65b61f4ae03d78f6b3e7a75}{get\+Submissions}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Obtém o mapa de submissões. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{classEdge}{int}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{classCentralManager_a643ce094bd7c48725510ae276e90ae7c}{get\+Reviewers}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Obtém o mapa de revisores. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_abbc133ec069036e1dadd3e67b66ee2a1}{set\+Min\+Reviews\+Per\+Submission}} (\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define o número mínimo de revisões por submissão. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classCentralManager_afa9c46b659475a248e82ac8e846f5158}{get\+Min\+Reviews\+Per\+Submission}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Obtém o número mínimo de revisões por submissão. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aa3b963ae62c739bc61fe7285acc8c2b9}{set\+Max\+Reviews\+Per\+Reviewer}} (\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define o número máximo de revisões por revisor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classCentralManager_a3b3093d7cf1391e5cce169abab6b6942}{get\+Max\+Reviews\+Per\+Reviewer}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Obtém o número máximo de revisões por revisor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_ac348c34a07546b5248031d5bafa2b31d}{set\+Primary\+Reviewer\+Expertise}} (\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define se a correspondência deve considerar o domínio primário do revisor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_ac990e65f1bbecf2f445820ec78222550}{set\+Secondary\+Reviewer\+Expertise}} (\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define se a correspondência deve considerar o domínio secundário do revisor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_addc93fb50deb58a0ed22d2bb406817c1}{set\+Primary\+Submission\+Domain}} (\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define se a correspondência deve considerar o domínio primário da submissão. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a13bc30935040c9995a53b9ff80aaaf4b}{set\+Secondary\+Submission\+Domain}} (\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classEdge}{value}})
+\begin{DoxyCompactList}\small\item\em Define se a correspondência deve considerar o domínio secundário da submissão. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aa8c7c52fd3c523761ba9e11dc929ae34}{set\+Generate\+Assignments}} (\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classEdge}{gen}})
+\begin{DoxyCompactList}\small\item\em Define o modo de geração de atribuições. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a8b0e8a6a080a550829b5c658a3a7a3b1}{set\+Risk\+Analysis}} (\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classEdge}{risk}})
+\begin{DoxyCompactList}\small\item\em Define o modo de análise de risco a executar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a35932231e596c083fe7d5cd1365d3d2c}{set\+Output\+Filename}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{name}})
+\begin{DoxyCompactList}\small\item\em Define o nome do ficheiro de output. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aa95358e1819fc7bfc8f9a0004861ea31}{show\+Submissions}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Imprime todas as submissões ordenadas por ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_ad5f19040032f1e6bab32c3fb2e67e3d2}{show\+Reviewers}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Imprime todas os revisores ordenados por ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a70ab6b7efc0525827a23f84ae2cb0ec5}{show\+Parameters}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Imprime os valores de variáveis internas à classe \doxylink{classCentralManager}{Central\+Manager} que correspondem a parâmetros. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_a69d03c821b377fdcdd4e1ddc12fc7147}{run\+Primary\+Only\+Assignment}} ()
+\begin{DoxyCompactList}\small\item\em Constrói a rede de fluxo, calcula o fluxo máximo e armazena os resultados. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{classEdge}{int}} $>$ \mbox{\hyperlink{classCentralManager_a1a2feaea3bdbd5b8c17f953bf2b73b5d}{evaluate\+Risk\+One}} () \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Avalia quais os revisores que são críticos para a viabilidade da atribuição. Um revisor é considerado de risco se a sua remoção tornar a atribuição inviável. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_ae0249149ecad6b17e29fa5a2a211fcb4}{write\+Assignment\+Output}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{filename}}) \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Escreve o resultado da última execução do algoritmo de atribuição. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{classCentralManager_aed01353d120a0f78ab31418af8ae67d7}{write\+Risk\+Output}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{filename}}, \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{classEdge}{int}} $>$ \&\mbox{\hyperlink{classEdge}{risky}}) \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Acrescenta ao ficheiro de output o resultado da análise de risco. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aa05159302c15664050ce2463dc738491}{run\+Interactive\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Executa o menu interativo da aplicação. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_ad22535e07dbe21d6ba4a9670b84cfe9d}{run\+Batch\+Mode}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{input\+\_\+file}}, \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{risk\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Executa o programa em modo batch. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_aa4529e145bf867ec38a22bfa3db158b3}{print\+Network}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&\mbox{\hyperlink{classEdge}{network}}) \mbox{\hyperlink{classEdge}{const}}
+\begin{DoxyCompactList}\small\item\em Imprime a estrutura da rede na consola para fins de depuração (debug). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{classCentralManager_a0794746ac8f34872e494e46a4e936983}{generate\+Output\+CSV}} (\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&\mbox{\hyperlink{classEdge}{filename}})
+\begin{DoxyCompactList}\small\item\em Método de compatibilidade para gerar o ficheiro CSV de output final. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gere o fluxo de execução, armazena as entidades de dados e gere os algoritmos de Fluxo Máximo. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCentralManager_ad6a25640a71ed68ea5f926be4d2b0d76}\label{classCentralManager_ad6a25640a71ed68ea5f926be4d2b0d76} 
+\index{CentralManager@{CentralManager}!addReviewer@{addReviewer}}
+\index{addReviewer@{addReviewer}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{addReviewer()}{addReviewer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::add\+Reviewer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{id,  }\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{structNodeInfo}{Node\+Info}} \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Adiciona a informação do revisor identificada com um id ao grafo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador do revisor \\
+\hline
+{\em info} & informação acerca do revisor \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_a3c8a8cde8d827ef0a560bf36571be5b2}\label{classCentralManager_a3c8a8cde8d827ef0a560bf36571be5b2} 
+\index{CentralManager@{CentralManager}!addSubmission@{addSubmission}}
+\index{addSubmission@{addSubmission}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{addSubmission()}{addSubmission()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::add\+Submission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{id,  }\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{structNodeInfo}{Node\+Info}} \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Adiciona a informação da submissão identificada com um id ao grafo. 
+
+Subsets 
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador da submissão \\
+\hline
+{\em info} & informação acerca da submissão\\
+\hline
+\end{DoxyParams}
+Sub\+Sets \Hypertarget{classCentralManager_aebd43a7a3922d364fdbb05a510cbc2e4}\label{classCentralManager_aebd43a7a3922d364fdbb05a510cbc2e4} 
+\index{CentralManager@{CentralManager}!clearData@{clearData}}
+\index{clearData@{clearData}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{clearData()}{clearData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::clear\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Limpa os dados atuais em memória. 
+
+\Hypertarget{classCentralManager_a1a2feaea3bdbd5b8c17f953bf2b73b5d}\label{classCentralManager_a1a2feaea3bdbd5b8c17f953bf2b73b5d} 
+\index{CentralManager@{CentralManager}!evaluateRiskOne@{evaluateRiskOne}}
+\index{evaluateRiskOne@{evaluateRiskOne}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{evaluateRiskOne()}{evaluateRiskOne()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{classEdge}{int}} $>$ Central\+Manager\+::evaluate\+Risk\+One (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Avalia quais os revisores que são críticos para a viabilidade da atribuição. Um revisor é considerado de risco se a sua remoção tornar a atribuição inviável. 
+
+\begin{DoxyReturn}{Returns}
+Um vetor com os IDs dos revisores de risco. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: O(\+R \texorpdfstring{$\ast$}{*} V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2) onde R é o número de revisores. 
+\end{DoxyNote}
+\Hypertarget{classCentralManager_a0794746ac8f34872e494e46a4e936983}\label{classCentralManager_a0794746ac8f34872e494e46a4e936983} 
+\index{CentralManager@{CentralManager}!generateOutputCSV@{generateOutputCSV}}
+\index{generateOutputCSV@{generateOutputCSV}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{generateOutputCSV()}{generateOutputCSV()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::generate\+Output\+CSV (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Método de compatibilidade para gerar o ficheiro CSV de output final. 
+
+\Hypertarget{classCentralManager_a3b3093d7cf1391e5cce169abab6b6942}\label{classCentralManager_a3b3093d7cf1391e5cce169abab6b6942} 
+\index{CentralManager@{CentralManager}!getMaxReviewsPerReviewer@{getMaxReviewsPerReviewer}}
+\index{getMaxReviewsPerReviewer@{getMaxReviewsPerReviewer}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{getMaxReviewsPerReviewer()}{getMaxReviewsPerReviewer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{int}} Central\+Manager\+::get\+Max\+Reviews\+Per\+Reviewer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtém o número máximo de revisões por revisor. 
+
+\begin{DoxyReturn}{Returns}
+Número máximo de revisões. 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_afa9c46b659475a248e82ac8e846f5158}\label{classCentralManager_afa9c46b659475a248e82ac8e846f5158} 
+\index{CentralManager@{CentralManager}!getMinReviewsPerSubmission@{getMinReviewsPerSubmission}}
+\index{getMinReviewsPerSubmission@{getMinReviewsPerSubmission}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{getMinReviewsPerSubmission()}{getMinReviewsPerSubmission()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{int}} Central\+Manager\+::get\+Min\+Reviews\+Per\+Submission (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtém o número mínimo de revisões por submissão. 
+
+\begin{DoxyReturn}{Returns}
+int Número mínimo de revisões 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_a643ce094bd7c48725510ae276e90ae7c}\label{classCentralManager_a643ce094bd7c48725510ae276e90ae7c} 
+\index{CentralManager@{CentralManager}!getReviewers@{getReviewers}}
+\index{getReviewers@{getReviewers}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{getReviewers()}{getReviewers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{classEdge}{int}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*} $>$ \& Central\+Manager\+::get\+Reviewers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtém o mapa de revisores. 
+
+\begin{DoxyReturn}{Returns}
+Referência constante para o mapa de revisores. 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_afcb0a63ac65b61f4ae03d78f6b3e7a75}\label{classCentralManager_afcb0a63ac65b61f4ae03d78f6b3e7a75} 
+\index{CentralManager@{CentralManager}!getSubmissions@{getSubmissions}}
+\index{getSubmissions@{getSubmissions}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{getSubmissions()}{getSubmissions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::unordered\+\_\+map}}$<$ \mbox{\hyperlink{classEdge}{int}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*} $>$ \& Central\+Manager\+::get\+Submissions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obtém o mapa de submissões. 
+
+\begin{DoxyReturn}{Returns}
+Referência constante para o mapa de submissões. 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_ad9b0951bf8b49db98c17b916831f3589}\label{classCentralManager_ad9b0951bf8b49db98c17b916831f3589} 
+\index{CentralManager@{CentralManager}!hasReviewer@{hasReviewer}}
+\index{hasReviewer@{hasReviewer}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{hasReviewer()}{hasReviewer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::has\+Reviewer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{id }\end{DoxyParamCaption}) const}
+
+
+
+Verifica se existe um revisor com o ID especificado. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador de revisor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool retorna verdadeiro se o revisor estiver presente no unordered\+\_\+map reviewers 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_adceed5758e49582dd2b42a069faca1ed}\label{classCentralManager_adceed5758e49582dd2b42a069faca1ed} 
+\index{CentralManager@{CentralManager}!hasSubmission@{hasSubmission}}
+\index{hasSubmission@{hasSubmission}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{hasSubmission()}{hasSubmission()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::has\+Submission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{id }\end{DoxyParamCaption}) const}
+
+
+
+Verifica se existe uma submissão com o ID especificado. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & identificador de submissão \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool retorna verdadeiro se a submissão estiver presente no unordered\+\_\+map submissions 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_aa634a52db204656e0b8c54204e166425}\label{classCentralManager_aa634a52db204656e0b8c54204e166425} 
+\index{CentralManager@{CentralManager}!loadFiles@{loadFiles}}
+\index{loadFiles@{loadFiles}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{loadFiles()}{loadFiles()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::load\+Files (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+Carrega os dados a partir do ficheiro especificado. 
+
+Caller to Load\+Files \Hypertarget{classCentralManager_aa4529e145bf867ec38a22bfa3db158b3}\label{classCentralManager_aa4529e145bf867ec38a22bfa3db158b3} 
+\index{CentralManager@{CentralManager}!printNetwork@{printNetwork}}
+\index{printNetwork@{printNetwork}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{printNetwork()}{printNetwork()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::print\+Network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&}]{network }\end{DoxyParamCaption}) const}
+
+
+
+Imprime a estrutura da rede na consola para fins de depuração (debug). 
+
+\Hypertarget{classCentralManager_ad22535e07dbe21d6ba4a9670b84cfe9d}\label{classCentralManager_ad22535e07dbe21d6ba4a9670b84cfe9d} 
+\index{CentralManager@{CentralManager}!runBatchMode@{runBatchMode}}
+\index{runBatchMode@{runBatchMode}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{runBatchMode()}{runBatchMode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::run\+Batch\+Mode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{input\+\_\+file,  }\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{risk\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Executa o programa em modo batch. 
+
+Carrega o ficheiro de input, executa o algoritmo de atribuição e, se aplicável, escreve o resultado da atribuição e da análise de risco para o ficheiro de output.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+\_\+file} & Caminho para o ficheiro CSV de entrada. \\
+\hline
+{\em output\+\_\+file} & Nome do ficheiro de output a gerar. Se estiver vazio, é usado o nome configurado nos dados de entrada. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_aa05159302c15664050ce2463dc738491}\label{classCentralManager_aa05159302c15664050ce2463dc738491} 
+\index{CentralManager@{CentralManager}!runInteractiveMenu@{runInteractiveMenu}}
+\index{runInteractiveMenu@{runInteractiveMenu}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{runInteractiveMenu()}{runInteractiveMenu()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::run\+Interactive\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Executa o menu interativo da aplicação. 
+
+Permite carregar ficheiros, visualizar dados, executar o algoritmo de atribuição, correr a análise de risco e exportar resultados através de um menu textual. \Hypertarget{classCentralManager_a69d03c821b377fdcdd4e1ddc12fc7147}\label{classCentralManager_a69d03c821b377fdcdd4e1ddc12fc7147} 
+\index{CentralManager@{CentralManager}!runPrimaryOnlyAssignment@{runPrimaryOnlyAssignment}}
+\index{runPrimaryOnlyAssignment@{runPrimaryOnlyAssignment}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{runPrimaryOnlyAssignment()}{runPrimaryOnlyAssignment()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::run\+Primary\+Only\+Assignment (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constrói a rede de fluxo, calcula o fluxo máximo e armazena os resultados. 
+
+\begin{DoxyReturn}{Returns}
+Verdadeiro se a atribuição for viável, falso caso existam revisões em falta. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: Dominada pelo algoritmo de Edmonds-\/\+Karp O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2). 
+\end{DoxyNote}
+\Hypertarget{classCentralManager_aa8c7c52fd3c523761ba9e11dc929ae34}\label{classCentralManager_aa8c7c52fd3c523761ba9e11dc929ae34} 
+\index{CentralManager@{CentralManager}!setGenerateAssignments@{setGenerateAssignments}}
+\index{setGenerateAssignments@{setGenerateAssignments}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setGenerateAssignments()}{setGenerateAssignments()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Generate\+Assignments (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{gen }\end{DoxyParamCaption})}
+
+
+
+Define o modo de geração de atribuições. 
+
+Este parâmetro controla que domínios podem ser considerados no matching entre revisores e submissões.
+
+
+\begin{DoxyParams}{Parameters}
+{\em gen} & Valor do modo Generate\+Assignments lido do ficheiro de input.\\
+\hline
+\end{DoxyParams}
+Parametros de Controlo \Hypertarget{classCentralManager_aa3b963ae62c739bc61fe7285acc8c2b9}\label{classCentralManager_aa3b963ae62c739bc61fe7285acc8c2b9} 
+\index{CentralManager@{CentralManager}!setMaxReviewsPerReviewer@{setMaxReviewsPerReviewer}}
+\index{setMaxReviewsPerReviewer@{setMaxReviewsPerReviewer}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setMaxReviewsPerReviewer()}{setMaxReviewsPerReviewer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Max\+Reviews\+Per\+Reviewer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define o número máximo de revisões por revisor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Número máximo de revisões. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_abbc133ec069036e1dadd3e67b66ee2a1}\label{classCentralManager_abbc133ec069036e1dadd3e67b66ee2a1} 
+\index{CentralManager@{CentralManager}!setMinReviewsPerSubmission@{setMinReviewsPerSubmission}}
+\index{setMinReviewsPerSubmission@{setMinReviewsPerSubmission}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setMinReviewsPerSubmission()}{setMinReviewsPerSubmission()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Min\+Reviews\+Per\+Submission (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define o número mínimo de revisões por submissão. 
+
+Parametros 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Número mínimo de revisões.\\
+\hline
+\end{DoxyParams}
+Parametros \Hypertarget{classCentralManager_a35932231e596c083fe7d5cd1365d3d2c}\label{classCentralManager_a35932231e596c083fe7d5cd1365d3d2c} 
+\index{CentralManager@{CentralManager}!setOutputFilename@{setOutputFilename}}
+\index{setOutputFilename@{setOutputFilename}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setOutputFilename()}{setOutputFilename()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Output\+Filename (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{name }\end{DoxyParamCaption})}
+
+
+
+Define o nome do ficheiro de output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Nome do ficheiro onde os resultados devem ser escritos. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_ac348c34a07546b5248031d5bafa2b31d}\label{classCentralManager_ac348c34a07546b5248031d5bafa2b31d} 
+\index{CentralManager@{CentralManager}!setPrimaryReviewerExpertise@{setPrimaryReviewerExpertise}}
+\index{setPrimaryReviewerExpertise@{setPrimaryReviewerExpertise}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setPrimaryReviewerExpertise()}{setPrimaryReviewerExpertise()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Primary\+Reviewer\+Expertise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{bool}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define se a correspondência deve considerar o domínio primário do revisor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & true para ativar a correspondência pelo domínio primário do revisor, false caso contrário.\\
+\hline
+\end{DoxyParams}
+Parâmetros Redundantes até tirar dúvida \Hypertarget{classCentralManager_addc93fb50deb58a0ed22d2bb406817c1}\label{classCentralManager_addc93fb50deb58a0ed22d2bb406817c1} 
+\index{CentralManager@{CentralManager}!setPrimarySubmissionDomain@{setPrimarySubmissionDomain}}
+\index{setPrimarySubmissionDomain@{setPrimarySubmissionDomain}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setPrimarySubmissionDomain()}{setPrimarySubmissionDomain()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Primary\+Submission\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{bool}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define se a correspondência deve considerar o domínio primário da submissão. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & true para ativar a correspondência pelo domínio primário da submissão, false caso contrário. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_a8b0e8a6a080a550829b5c658a3a7a3b1}\label{classCentralManager_a8b0e8a6a080a550829b5c658a3a7a3b1} 
+\index{CentralManager@{CentralManager}!setRiskAnalysis@{setRiskAnalysis}}
+\index{setRiskAnalysis@{setRiskAnalysis}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setRiskAnalysis()}{setRiskAnalysis()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Risk\+Analysis (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{int}}}]{risk }\end{DoxyParamCaption})}
+
+
+
+Define o modo de análise de risco a executar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em risk} & Valor do parâmetro Risk\+Analysis lido do ficheiro de input. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_ac990e65f1bbecf2f445820ec78222550}\label{classCentralManager_ac990e65f1bbecf2f445820ec78222550} 
+\index{CentralManager@{CentralManager}!setSecondaryReviewerExpertise@{setSecondaryReviewerExpertise}}
+\index{setSecondaryReviewerExpertise@{setSecondaryReviewerExpertise}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setSecondaryReviewerExpertise()}{setSecondaryReviewerExpertise()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Secondary\+Reviewer\+Expertise (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{bool}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define se a correspondência deve considerar o domínio secundário do revisor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & true para ativar a correspondência pelo domínio secundário do revisor, false caso contrário. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_a13bc30935040c9995a53b9ff80aaaf4b}\label{classCentralManager_a13bc30935040c9995a53b9ff80aaaf4b} 
+\index{CentralManager@{CentralManager}!setSecondarySubmissionDomain@{setSecondarySubmissionDomain}}
+\index{setSecondarySubmissionDomain@{setSecondarySubmissionDomain}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{setSecondarySubmissionDomain()}{setSecondarySubmissionDomain()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::set\+Secondary\+Submission\+Domain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{bool}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Define se a correspondência deve considerar o domínio secundário da submissão. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & true para ativar a correspondência pelo domínio secundário da submissão, false caso contrário. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCentralManager_a70ab6b7efc0525827a23f84ae2cb0ec5}\label{classCentralManager_a70ab6b7efc0525827a23f84ae2cb0ec5} 
+\index{CentralManager@{CentralManager}!showParameters@{showParameters}}
+\index{showParameters@{showParameters}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{showParameters()}{showParameters()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::show\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Imprime os valores de variáveis internas à classe \doxylink{classCentralManager}{Central\+Manager} que correspondem a parâmetros. 
+
+\Hypertarget{classCentralManager_ad5f19040032f1e6bab32c3fb2e67e3d2}\label{classCentralManager_ad5f19040032f1e6bab32c3fb2e67e3d2} 
+\index{CentralManager@{CentralManager}!showReviewers@{showReviewers}}
+\index{showReviewers@{showReviewers}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{showReviewers()}{showReviewers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::show\+Reviewers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Imprime todas os revisores ordenados por ID. 
+
+Extrai os IDs do revisor de um mapa interno para um vetor interno, ordena-\/os, e imprime as informações dos revisores
+
+Domínios secundários nulos são representados por "{}-\/"{}.
+
+Se nenhum revisor estiver disponível, uma mensagem de aviso é impressa. \Hypertarget{classCentralManager_aa95358e1819fc7bfc8f9a0004861ea31}\label{classCentralManager_aa95358e1819fc7bfc8f9a0004861ea31} 
+\index{CentralManager@{CentralManager}!showSubmissions@{showSubmissions}}
+\index{showSubmissions@{showSubmissions}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{showSubmissions()}{showSubmissions()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Central\+Manager\+::show\+Submissions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Imprime todas as submissões ordenadas por ID. 
+
+Extrai os IDs da submissão de um mapa interno para um vetor interno, ordena-\/os, e imprime as informações das submissões
+
+Domínios secundários nulos são representados por "{}-\/"{}.
+
+Se nenhuma submissão estiver disponível, uma mensagem de aviso é impressa. \Hypertarget{classCentralManager_ae0249149ecad6b17e29fa5a2a211fcb4}\label{classCentralManager_ae0249149ecad6b17e29fa5a2a211fcb4} 
+\index{CentralManager@{CentralManager}!writeAssignmentOutput@{writeAssignmentOutput}}
+\index{writeAssignmentOutput@{writeAssignmentOutput}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{writeAssignmentOutput()}{writeAssignmentOutput()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::write\+Assignment\+Output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{filename }\end{DoxyParamCaption}) const}
+
+
+
+Escreve o resultado da última execução do algoritmo de atribuição. 
+
+Se a última execução tiver sido viável, escreve as atribuições ordenadas por submissão e por revisor, bem como o número total de revisões atribuídas. Caso contrário, escreve as submissões com revisões em falta.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Nome do ficheiro de output a gerar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se o ficheiro tiver sido escrito com sucesso, false caso contrário. 
+\end{DoxyReturn}
+\Hypertarget{classCentralManager_aed01353d120a0f78ab31418af8ae67d7}\label{classCentralManager_aed01353d120a0f78ab31418af8ae67d7} 
+\index{CentralManager@{CentralManager}!writeRiskOutput@{writeRiskOutput}}
+\index{writeRiskOutput@{writeRiskOutput}!CentralManager@{CentralManager}}
+\doxysubsubsection{\texorpdfstring{writeRiskOutput()}{writeRiskOutput()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Central\+Manager\+::write\+Risk\+Output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::string}} \&}]{filename,  }\item[{\mbox{\hyperlink{classEdge}{const}} \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std\+::vector}}$<$ \mbox{\hyperlink{classEdge}{int}} $>$ \&}]{risky }\end{DoxyParamCaption}) const}
+
+
+
+Acrescenta ao ficheiro de output o resultado da análise de risco. 
+
+O método escreve a secção "{}\#\+Risk Analysis"{} e a lista de IDs dos revisores considerados críticos. Se não existirem revisores de risco, a linha seguinte fica vazia.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Nome do ficheiro onde a informação deve ser escrita. \\
+\hline
+{\em risky} & Vetor com os IDs dos revisores classificados como de risco. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true se a escrita tiver sido concluída com sucesso, false caso contrário. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{CentralManager_8h}{Central\+Manager.\+h}}\item 
+\mbox{\hyperlink{CentralManager_8cpp}{Central\+Manager.\+cpp}}\end{DoxyCompactItemize}

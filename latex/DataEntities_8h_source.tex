@@ -1,0 +1,27 @@
+\doxysection{Data\+Entities.\+h}
+\hypertarget{DataEntities_8h_source}{}\label{DataEntities_8h_source}\mbox{\hyperlink{DataEntities_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16}{NodeType}}\{\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}},\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}},\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a0f710bba8d16303a415266af8bb52fcb}{submission}},\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a7ba917e4e5158c8a9ed6eda08a6ec572}{reviewer}}\};}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structNodeInfo}{NodeInfo}}\{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16}{NodeType}}\ \mbox{\hyperlink{structNodeInfo_a8ef5489233e929a55e21fade521da433}{type}};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structNodeInfo_a8d098d28f8eea752943220e1d3661e93}{id}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structNodeInfo_a7e99f9b1ea0132d5d48a811523c16070}{primaryDomain}};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structNodeInfo_acc115c4feb050dcd3f6cf7ebd87786e2}{secondaryDomain}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ std::string\ \mbox{\hyperlink{structNodeInfo_ae926e057a3c40a9c125e068019c77ae4}{title}};}
+\DoxyCodeLine{00017\ \ \ \ \ std::string\ \mbox{\hyperlink{structNodeInfo_a9ea2872186656db389e62ef0abce788e}{authors}};}
+\DoxyCodeLine{00018\ \ \ \ \ std::string\ \mbox{\hyperlink{structNodeInfo_a86ef1770a714d5abcb7c7dbf2397f057}{reviewerName}};}
+\DoxyCodeLine{00019\ \ \ \ \ std::string\ \mbox{\hyperlink{structNodeInfo_a16d60223f9ada5b3a1ff6f2e61b7c0e7}{email}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structNodeInfo_a8b1ffb1088ae8e791fb727f2ebdadc4d}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (this-\/>\textcolor{keywordtype}{id}\ ==\ other.\mbox{\hyperlink{structNodeInfo_a8d098d28f8eea752943220e1d3661e93}{id}})\ \&\&\ (this-\/>type\ ==\ other.\mbox{\hyperlink{structNodeInfo_a8ef5489233e929a55e21fade521da433}{type}});}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \};}
+
+\end{DoxyCode}

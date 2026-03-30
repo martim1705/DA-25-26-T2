@@ -1,0 +1,106 @@
+\doxysection{Max\+Flow Namespace Reference}
+\hypertarget{namespaceMaxFlow}{}\label{namespaceMaxFlow}\index{MaxFlow@{MaxFlow}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{namespaceMaxFlow_aea254e1c998d41bbf523ba52403704cf}{add\+Residual\+Edge}} (\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEdge}{from}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classEdge}{to}}, \mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{classEdge}{capacity}})
+\begin{DoxyCompactList}\small\item\em Cria um par de arestas residuais (forward e backward) entre dois vértices. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{void}} \mbox{\hyperlink{namespaceMaxFlow_a6e22b4398995f2d737e5e730c4d40b02}{reset\+Search\+State}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&graph)
+\begin{DoxyCompactList}\small\item\em Faz reset ao estado (visitado e caminho) de todos os vértices do grafo para uma nova travessia BFS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{bool}} \mbox{\hyperlink{namespaceMaxFlow_ab194a218e3074f4872e523261c3236bc}{bfs\+Residual}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&graph, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}})
+\begin{DoxyCompactList}\small\item\em Executa uma pesquisa em largura (BFS) para encontrar um caminho de aumento no grafo residual. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEdge}{int}} \mbox{\hyperlink{namespaceMaxFlow_addaebf858d92eb46df5bbeed27877d71}{edmonds\+Karp}} (\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&graph, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}}, \mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}})
+\begin{DoxyCompactList}\small\item\em Calcula o fluxo máximo de uma rede utilizando o algoritmo de Edmonds-\/\+Karp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceMaxFlow_aea254e1c998d41bbf523ba52403704cf}\label{namespaceMaxFlow_aea254e1c998d41bbf523ba52403704cf} 
+\index{MaxFlow@{MaxFlow}!addResidualEdge@{addResidualEdge}}
+\index{addResidualEdge@{addResidualEdge}!MaxFlow@{MaxFlow}}
+\doxysubsubsection{\texorpdfstring{addResidualEdge()}{addResidualEdge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Max\+Flow\+::add\+Residual\+Edge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{from,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{to,  }\item[{\mbox{\hyperlink{classEdge}{int}}}]{capacity }\end{DoxyParamCaption})}
+
+
+
+Cria um par de arestas residuais (forward e backward) entre dois vértices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & O vértice de origem. \\
+\hline
+{\em to} & O vértice de destino. \\
+\hline
+{\em capacity} & A capacidade máxima de fluxo da aresta forward. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: O(1) 
+\end{DoxyNote}
+\Hypertarget{namespaceMaxFlow_ab194a218e3074f4872e523261c3236bc}\label{namespaceMaxFlow_ab194a218e3074f4872e523261c3236bc} 
+\index{MaxFlow@{MaxFlow}!bfsResidual@{bfsResidual}}
+\index{bfsResidual@{bfsResidual}!MaxFlow@{MaxFlow}}
+\doxysubsubsection{\texorpdfstring{bfsResidual()}{bfsResidual()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{bool}} Max\+Flow\+::bfs\+Residual (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&}]{graph,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{sink }\end{DoxyParamCaption})}
+
+
+
+Executa uma pesquisa em largura (BFS) para encontrar um caminho de aumento no grafo residual. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo da rede de fluxo. \\
+\hline
+{\em source} & O vértice fonte (source). \\
+\hline
+{\em sink} & O vértice sumidouro (sink). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Verdadeiro (true) se encontrar um caminho de aumento até ao sink, falso caso contrário. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: O(V + E) onde V é o número de vértices e E o número de arestas. 
+\end{DoxyNote}
+\Hypertarget{namespaceMaxFlow_addaebf858d92eb46df5bbeed27877d71}\label{namespaceMaxFlow_addaebf858d92eb46df5bbeed27877d71} 
+\index{MaxFlow@{MaxFlow}!edmondsKarp@{edmondsKarp}}
+\index{edmondsKarp@{edmondsKarp}!MaxFlow@{MaxFlow}}
+\doxysubsubsection{\texorpdfstring{edmondsKarp()}{edmondsKarp()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{int}} Max\+Flow\+::edmonds\+Karp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&}]{graph,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{source,  }\item[{\mbox{\hyperlink{classVertex}{Vertex}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \texorpdfstring{$\ast$}{*}}]{sink }\end{DoxyParamCaption})}
+
+
+
+Calcula o fluxo máximo de uma rede utilizando o algoritmo de Edmonds-\/\+Karp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo da rede de fluxo. \\
+\hline
+{\em source} & O vértice fonte (source). \\
+\hline
+{\em sink} & O vértice sumidouro (sink). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O valor inteiro do fluxo máximo encontrado. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2) onde V é o número de vértices e E o número de arestas. 
+\end{DoxyNote}
+\Hypertarget{namespaceMaxFlow_a6e22b4398995f2d737e5e730c4d40b02}\label{namespaceMaxFlow_a6e22b4398995f2d737e5e730c4d40b02} 
+\index{MaxFlow@{MaxFlow}!resetSearchState@{resetSearchState}}
+\index{resetSearchState@{resetSearchState}!MaxFlow@{MaxFlow}}
+\doxysubsubsection{\texorpdfstring{resetSearchState()}{resetSearchState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEdge}{void}} Max\+Flow\+::reset\+Search\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGraph}{Graph}}$<$ \mbox{\hyperlink{structNodeInfo}{Node\+Info}} $>$ \&}]{graph }\end{DoxyParamCaption})}
+
+
+
+Faz reset ao estado (visitado e caminho) de todos os vértices do grafo para uma nova travessia BFS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & O grafo da rede de fluxo. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Complexidade Temporal\+: O(\+V) onde V é o número de vértices. 
+\end{DoxyNote}

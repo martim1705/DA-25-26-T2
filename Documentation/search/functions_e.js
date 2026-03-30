@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['setdist_0',['setDist',['../classVertex.html#a060fbea0c3738cc3e09d84ad8c431b34',1,'Vertex']]],
+  ['setflow_1',['setFlow',['../classEdge.html#a1819116e2c156733a14bbd94cc27908e',1,'Edge']]],
+  ['setgenerateassignments_2',['setGenerateAssignments',['../classCentralManager.html#aa8c7c52fd3c523761ba9e11dc929ae34',1,'CentralManager']]],
+  ['setindegree_3',['setIndegree',['../classVertex.html#af9c4caaac19bdaae5a88a7a671639b59',1,'Vertex']]],
+  ['setinfo_4',['setInfo',['../classVertex.html#a31cd60c26640f8072a928ba70eb2f95e',1,'Vertex']]],
+  ['setlow_5',['setLow',['../classVertex.html#a62acec2c4fcbec56e995974b91444ec9',1,'Vertex']]],
+  ['setmaxreviewsperreviewer_6',['setMaxReviewsPerReviewer',['../classCentralManager.html#aa3b963ae62c739bc61fe7285acc8c2b9',1,'CentralManager']]],
+  ['setminreviewspersubmission_7',['setMinReviewsPerSubmission',['../classCentralManager.html#abbc133ec069036e1dadd3e67b66ee2a1',1,'CentralManager']]],
+  ['setnum_8',['setNum',['../classVertex.html#ab3f9026ba6cbd11243ab484a856c6581',1,'Vertex']]],
+  ['setoutputfilename_9',['setOutputFilename',['../classCentralManager.html#a35932231e596c083fe7d5cd1365d3d2c',1,'CentralManager']]],
+  ['setpath_10',['setPath',['../classVertex.html#a5ebf4b550ec94b89a8f80df1a53cc97d',1,'Vertex']]],
+  ['setprimaryreviewerexpertise_11',['setPrimaryReviewerExpertise',['../classCentralManager.html#ac348c34a07546b5248031d5bafa2b31d',1,'CentralManager']]],
+  ['setprimarysubmissiondomain_12',['setPrimarySubmissionDomain',['../classCentralManager.html#addc93fb50deb58a0ed22d2bb406817c1',1,'CentralManager']]],
+  ['setprocessing_13',['setProcessing',['../classVertex.html#a5ccb6f7215c915afdbcbdb81ad70a408',1,'Vertex']]],
+  ['setreverse_14',['setReverse',['../classEdge.html#afe8f8429025756c63f38e8c6fde7382c',1,'Edge']]],
+  ['setriskanalysis_15',['setRiskAnalysis',['../classCentralManager.html#a8b0e8a6a080a550829b5c658a3a7a3b1',1,'CentralManager']]],
+  ['setsecondaryreviewerexpertise_16',['setSecondaryReviewerExpertise',['../classCentralManager.html#ac990e65f1bbecf2f445820ec78222550',1,'CentralManager']]],
+  ['setsecondarysubmissiondomain_17',['setSecondarySubmissionDomain',['../classCentralManager.html#a13bc30935040c9995a53b9ff80aaaf4b',1,'CentralManager']]],
+  ['setselected_18',['setSelected',['../classEdge.html#a87c8402c5edd6729a2c934e2a0cce6fe',1,'Edge']]],
+  ['setvisited_19',['setVisited',['../classVertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23',1,'Vertex']]],
+  ['showparameters_20',['showParameters',['../classCentralManager.html#a70ab6b7efc0525827a23f84ae2cb0ec5',1,'CentralManager']]],
+  ['showreviewers_21',['showReviewers',['../classCentralManager.html#ad5f19040032f1e6bab32c3fb2e67e3d2',1,'CentralManager']]],
+  ['showsubmissions_22',['showSubmissions',['../classCentralManager.html#aa95358e1819fc7bfc8f9a0004861ea31',1,'CentralManager']]]
+];

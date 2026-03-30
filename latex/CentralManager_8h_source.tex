@@ -1,0 +1,138 @@
+\doxysection{Central\+Manager.\+h}
+\hypertarget{CentralManager_8h_source}{}\label{CentralManager_8h_source}\mbox{\hyperlink{CentralManager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DataEntities_8h}{DataEntities.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCentralManager}{CentralManager}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ buildNetwork(}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classGraph}{Graph<NodeInfo>}}\&\ network,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::unordered\_map<\textcolor{keywordtype}{int},\ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*>\&\ netSubs,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::unordered\_map<\textcolor{keywordtype}{int},\ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*>\&\ netRevs,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*\&\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}},}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*\&\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}},}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ excludeReviewerId\ =\ -\/1}
+\DoxyCodeLine{00041\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::vector<int>\ allowedSubmissionDomains(\textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ sub)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ std::vector<int>\ allowedReviewerDomains(\textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ rev)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ \ \ \ \ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ canMatch(\textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ sub,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ rev,\ \textcolor{keywordtype}{int}\&\ matchDomain)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ std::vector<std::tuple<int,int,int>>\ extractAssignment(}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<\textcolor{keywordtype}{int},\ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*>\&\ netRevs}
+\DoxyCodeLine{00091\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ std::vector<std::tuple<int,int,int>>\ extractMissingReviews(}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<\textcolor{keywordtype}{int},\ \mbox{\hyperlink{classVertex}{Vertex<NodeInfo>}}*>\&\ netSubs}
+\DoxyCodeLine{00102\ \ \ \ \ )\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::vector\ <std::tuple<int,int,int>>\ lastAssignments;}
+\DoxyCodeLine{00113\ \ \ \ \ std::vector\ <std::tuple<int,int,int>>\ lastMissing;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{bool}\ hasAssignmentRun\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ lastRunFeasible\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{classGraph}{Graph<NodeInfo>}}\ graph;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00133\ \ \ \ \ std::unordered\_map<int,Vertex<NodeInfo>*>\ submissions;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \ \ \ \ std::unordered\_map<int,Vertex<NodeInfo>*>\ reviewers;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{int}\ minReviewsPerSubmission\ =\ 0;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{int}\ maxReviewsPerReviewer\ =\ 0;}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ primaryReviewerExpertise\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ secondaryReviewerExpertise\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ primarySubmissionDomain\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{bool}\ secondarySubmissionDomain\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{int}\ GenerateAssignments\ =\ 0;}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{int}\ RiskAnalysis\ =\ 0;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00171\ \ \ \ \ std::string\ outputFilename;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_aa634a52db204656e0b8c54204e166425}{loadFiles}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aebd43a7a3922d364fdbb05a510cbc2e4}{clearData}}();}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a3c8a8cde8d827ef0a560bf36571be5b2}{addSubmission}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ info);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_ad6a25640a71ed68ea5f926be4d2b0d76}{addReviewer}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structNodeInfo}{NodeInfo}}\&\ info);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_adceed5758e49582dd2b42a069faca1ed}{hasSubmission}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_ad9b0951bf8b49db98c17b916831f3589}{hasReviewer}}(\textcolor{keywordtype}{int}\ \textcolor{keywordtype}{id})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<int,\ Vertex<NodeInfo>*>\&\ \mbox{\hyperlink{classCentralManager_afcb0a63ac65b61f4ae03d78f6b3e7a75}{getSubmissions}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<int,\ Vertex<NodeInfo>*>\&\ \mbox{\hyperlink{classCentralManager_a643ce094bd7c48725510ae276e90ae7c}{getReviewers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_abbc133ec069036e1dadd3e67b66ee2a1}{setMinReviewsPerSubmission}}(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCentralManager_afa9c46b659475a248e82ac8e846f5158}{getMinReviewsPerSubmission}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aa3b963ae62c739bc61fe7285acc8c2b9}{setMaxReviewsPerReviewer}}(\textcolor{keywordtype}{int}\ value);}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCentralManager_a3b3093d7cf1391e5cce169abab6b6942}{getMaxReviewsPerReviewer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_ac348c34a07546b5248031d5bafa2b31d}{setPrimaryReviewerExpertise}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_ac990e65f1bbecf2f445820ec78222550}{setSecondaryReviewerExpertise}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_addc93fb50deb58a0ed22d2bb406817c1}{setPrimarySubmissionDomain}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a13bc30935040c9995a53b9ff80aaaf4b}{setSecondarySubmissionDomain}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aa8c7c52fd3c523761ba9e11dc929ae34}{setGenerateAssignments}}(\textcolor{keywordtype}{int}\ gen);}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a8b0e8a6a080a550829b5c658a3a7a3b1}{setRiskAnalysis}}(\textcolor{keywordtype}{int}\ risk);}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a35932231e596c083fe7d5cd1365d3d2c}{setOutputFilename}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aa95358e1819fc7bfc8f9a0004861ea31}{showSubmissions}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_ad5f19040032f1e6bab32c3fb2e67e3d2}{showReviewers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a70ab6b7efc0525827a23f84ae2cb0ec5}{showParameters}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_a69d03c821b377fdcdd4e1ddc12fc7147}{runPrimaryOnlyAssignment}}();}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00355\ \ \ \ \ std::vector<int>\ \mbox{\hyperlink{classCentralManager_a1a2feaea3bdbd5b8c17f953bf2b73b5d}{evaluateRiskOne}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_ae0249149ecad6b17e29fa5a2a211fcb4}{writeAssignmentOutput}}(\textcolor{keyword}{const}\ std::string\&\ filename)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCentralManager_aed01353d120a0f78ab31418af8ae67d7}{writeRiskOutput}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ std::vector<int>\&\ risky)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aa05159302c15664050ce2463dc738491}{runInteractiveMenu}}();}
+\DoxyCodeLine{00390\ \ \ \ \ }
+\DoxyCodeLine{00401\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_ad22535e07dbe21d6ba4a9670b84cfe9d}{runBatchMode}}(\textcolor{keyword}{const}\ std::string\ \&\ input\_file,\ \textcolor{keyword}{const}\ std::string\ \&\ risk\_file);}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_aa4529e145bf867ec38a22bfa3db158b3}{printNetwork}}(\mbox{\hyperlink{classGraph}{Graph<NodeInfo>}}\&\ network)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCentralManager_a0794746ac8f34872e494e46a4e936983}{generateOutputCSV}}(\textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00408\ \};}
+\DoxyCodeLine{00409\ }
+
+\end{DoxyCode}

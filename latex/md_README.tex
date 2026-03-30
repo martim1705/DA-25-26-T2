@@ -1,0 +1,45 @@
+\chapter{DA-\/25-\/26-\/\+T2}
+\hypertarget{md_README}{}\label{md_README}\index{DA-\/25-\/26-\/T2@{DA-\/25-\/26-\/T2}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+Scientific Conference Organization Tool Projeto de Programação I -\/ Desenho de Algoritmos (2025/2026)
+
+Code/ ├── \doxylink{main_8cpp}{main.\+cpp} ├── \doxylink{CentralManager_8h}{Central\+Manager.\+h} ├── \doxylink{CentralManager_8cpp}{Central\+Manager.\+cpp} ├── \doxylink{Parser_8h}{Parser.\+h} ├── \doxylink{Parser_8cpp}{Parser.\+cpp} ├── \doxylink{MaxFlow_8h}{Max\+Flow.\+h} ├── \doxylink{MaxFlow_8cpp}{Max\+Flow.\+cpp} ├── \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{Data\+Entities.\+h} └── \doxylink{Graph_8h}{Graph.\+h}
+
+Detalhe das Funções por Ficheiro
+
+\doxylink{main_8cpp}{main.\+cpp} \begin{DoxyVerb}int main(int argc, char* argv[]): Lê os argumentos da linha de comandos. Se detetar -b input.csv risk.csv, instancia a ferramenta em modo batch. Caso contrário, arranca o menu interativo (T1.1).
+\end{DoxyVerb}
+ \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{Data\+Entities.\+h} \begin{DoxyVerb}enum NodeType: Define se o nó é SUBMISSION, REVIEWER, SOURCE ou SINK.
+
+struct NodeInfo: Estrutura com ID, domínios, nome/título, autores e email. Inclui a sobrecarga do operator==.
+\end{DoxyVerb}
+ \doxylink{Graph_8h}{Graph.\+h} \begin{DoxyVerb}Ficheiro original das TP, inalterado nas suas funções nucleares (addVertex, addEdge, addBidirectionalEdge, findVertex, etc.).
+\end{DoxyVerb}
+ \doxylink{Parser_8h}{Parser.\+h} / \doxylink{Parser_8cpp}{Parser.\+cpp} (Tarefa \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{1.\+2}) \begin{DoxyVerb}bool loadData(const std::string& filename): Abre o ficheiro CSV e gere a leitura.
+
+void parseSubmissions(std::ifstream& file): Lê o bloco #Submissions e instancia a NodeInfo.
+
+void parseReviewers(std::ifstream& file): Lê o bloco #Reviewers e instancia a NodeInfo.
+
+void parseParameters(std::ifstream& file): Lê e guarda o MinReviewsPerSubmission, MaxReviewsPerReviewer, etc.
+
+void parseControl(std::ifstream& file): Lê e guarda o GenerateAssignments, RiskAnalysis e OutputFileName.
+\end{DoxyVerb}
+ \doxylink{MaxFlow_8h}{Max\+Flow.\+h} / \doxylink{MaxFlow_8cpp}{Max\+Flow.\+cpp} (Tarefas \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{2.\+1} e \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{2.\+2}) \begin{DoxyVerb}void buildNetwork(Graph<NodeInfo>& graph, const std::unordered_map<int, Vertex<NodeInfo>*>& subs, const std::unordered_map<int, Vertex<NodeInfo>*>& revs, int mode): Constrói a Origem, o Destino e as arestas com base no GenerateAssignments (0, 1, 2 ou 3) e nos parâmetros de capacidade.
+
+void edmondsKarp(Graph<NodeInfo>& graph, Vertex<NodeInfo>* source, Vertex<NodeInfo>* sink): Implementação do algoritmo base de fluxo máximo.
+
+std::vector<int> evaluateRiskOne(Graph<NodeInfo>& graph): Executa sistematicamente o fluxo máximo desativando um revisor de cada vez, retornando a lista de revisores cuja ausência inviabiliza as revisões mínimas.
+\end{DoxyVerb}
+ \doxylink{CentralManager_8h}{Central\+Manager.\+h} / \doxylink{CentralManager_8cpp}{Central\+Manager.\+cpp} (Tarefas \doxylink{classEdge_ab976213419283ed754f42f57b195a288}{1.\+1} e Escrita de Output) \begin{DoxyVerb}void runInteractiveMenu(): Apresenta as opções na consola e processa o input do utilizador.
+
+void runBatchMode(const std::string& inputFile, const std::string& riskFile): Executa o fluxo completo do programa sem interação humana.
+
+void generateOutputCSV(const std::string& filename): Filtra as arestas do grafo onde o fluxo é igual a 1 e escreve o ficheiro com os blocos #SubmissionId,ReviewerId,Match e #ReviewerId,SubmissionId,Match.
+
+void generateUnsuccessfulReport(): Imprime as submissões que não atingiram o mínimo de revisões exigidas.
+
+void generateRiskOutput(const std::string& filename, const std::vector<int>& riskyReviewers): Escreve o ficheiro de análise de risco.
+\end{DoxyVerb}
+ 

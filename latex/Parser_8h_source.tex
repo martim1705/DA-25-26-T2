@@ -1,0 +1,29 @@
+\doxysection{Parser.\+h}
+\hypertarget{Parser_8h_source}{}\label{Parser_8h_source}\mbox{\hyperlink{Parser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PARSER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PARSER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCentralManager}{CentralManager}};}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classParser}{Parser}}\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{classCentralManager}{CentralManager}}\&\ manager;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ trim(\mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{str}});}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ parseSubmissionLine(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{line}});}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ parseReviewerLine(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{line}});}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ parseParameterLine(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{line}});}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ parseControlLine(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{line}});}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classParser_a7c9cb8caac00d78a480f0599a022f4c6}{Parser}}(\mbox{\hyperlink{classCentralManager}{CentralManager}}\&\ \mbox{\hyperlink{classEdge}{m}})\ :\ manager(\mbox{\hyperlink{classEdge}{m}})\ \{\}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classParser_ac94df855c3655f4a4d1ad10d10d64f77}{loadData}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classEdge_ab976213419283ed754f42f57b195a288}{std::string}}\&\ \mbox{\hyperlink{classEdge}{filename}});}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

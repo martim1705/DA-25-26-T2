@@ -1,0 +1,20 @@
+\doxysection{Max\+Flow.\+h}
+\hypertarget{MaxFlow_8h_source}{}\label{MaxFlow_8h_source}\mbox{\hyperlink{MaxFlow_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once\ }}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{Graph_8h}{Graph.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{DataEntities_8h}{DataEntities.h}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{comment}{//Tiny\ namespace\ API}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceMaxFlow}{MaxFlow}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceMaxFlow_aea254e1c998d41bbf523ba52403704cf}{addResidualEdge}}(\mbox{\hyperlink{classEdge}{Vertex<NodeInfo>}}*\ \mbox{\hyperlink{classEdge}{from}},\ \mbox{\hyperlink{classEdge}{Vertex<NodeInfo>}}*\ \mbox{\hyperlink{classEdge}{to}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEdge}{capacity}});}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceMaxFlow_a6e22b4398995f2d737e5e730c4d40b02}{resetSearchState}}(\mbox{\hyperlink{classEdge}{Graph<NodeInfo>}}\&\ graph);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceMaxFlow_ab194a218e3074f4872e523261c3236bc}{bfsResidual}}(\mbox{\hyperlink{classEdge}{Graph<NodeInfo>}}\&\ graph,\ \mbox{\hyperlink{classEdge}{Vertex\ <NodeInfo>}}*\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}},\ \mbox{\hyperlink{classEdge}{Vertex<NodeInfo>}}*\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}});}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespaceMaxFlow_addaebf858d92eb46df5bbeed27877d71}{edmondsKarp}}(\mbox{\hyperlink{classEdge}{Graph<NodeInfo>}}\&\ graph,\ \mbox{\hyperlink{classEdge}{Vertex<NodeInfo>}}*\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16a36cd38f49b9afa08222c0dc9ebfe35eb}{source}},\ \mbox{\hyperlink{classEdge}{Vertex<NodeInfo>}}*\ \mbox{\hyperlink{DataEntities_8h_acac9cbaeea226ed297804c012dc12b16af6e041176f8cc2998f9465ede0dfeeb1}{sink}});}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}
