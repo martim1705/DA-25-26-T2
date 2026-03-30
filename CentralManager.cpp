@@ -205,21 +205,21 @@ void CentralManager::runBatchMode(const std::string &input_file, const std::stri
 
 
     // Corre primeiro o assignment principal antes de qualquer análise extra.
-    const bool feasible = runPrimaryOnlyAssigment();
+    const bool feasible = runPrimaryOnlyAssignment();
 
     if (GenerateAssignments != 0 || !feasible) {
         //Por estar a usar modo append é preciso limpar o ficheiro, se o ficheiro já existir
         std::ofstream clearFile("./output/"+ outputFilename);
         clearFile.close();
 
-        if (writeAssignementOutput(outputFilename)) {
+        if (writeAssignmentOutput(outputFilename)) {
            std::cout << "Assignment output written to " << outputFilename << "\n";
         }
     }
 
     // A análise de risco só é feita para o caso K = 1.
     if (RiskAnalysis == 1) {
-        std::vector<int> risky = evaluateRiskone();
+        std::vector<int> risky = evaluateRiskOne();
         if (writeRiskOutput(outputFilename, risky)) {
             std::cout << "Risk analysis written to " << outputFilename << "\n";
     }
@@ -291,7 +291,7 @@ void CentralManager::runInteractiveMenu() {
 
             // Executa o assignment e mostra se foi possível satisfazer todas as submissões.
             case 5:
-                if (runPrimaryOnlyAssigment()) {
+                if (runPrimaryOnlyAssignment()) {
                     std::cout << "Assignment is feasible. Total matches: " << lastAssignments.size() << "\n";
                 }
                 else {
@@ -311,7 +311,7 @@ void CentralManager::runInteractiveMenu() {
                     std::cout << "RiskAnalysis is set to 0 in the current dataset.\n";
                 }
                 else if (RiskAnalysis == 1) {
-                    std::vector<int> risky = evaluateRiskone();
+                    std::vector<int> risky = evaluateRiskOne();
                     std::cout << "Risky reviewers: ";
                     if (risky.empty()) std::cout << "none";
                     else std::cout << joinReviewerIds(risky);
@@ -337,14 +337,14 @@ void CentralManager::runInteractiveMenu() {
                     std::getline(std::cin, outName);
 
                     // outName will naturally be an empty string if you just press Enter
-                    if (writeAssignementOutput(outName)) {
-                        std::cout << "Assignment results exported successfully.\n";
+                    if (writeAssignmentOutput(outName)) {
+                        std::cout << "Results exported successfully.\n";
                     }
 
                     if (RiskAnalysis == 1) {
-                        std::vector<int> risky = evaluateRiskone();
-                        if (writeRiskOutput(outName, risky)) {
-                            std::cout << "Risk analysis written to " << outName << "\n";
+                        std::vector<int> risky = evaluateRiskOne();
+                        if (writeRiskOutput(outputFilename, risky)) {
+                            std::cout << "Risk analysis written to " << outputFilename << "\n";
                         }
                     }
                 }
@@ -523,7 +523,7 @@ std::vector<std::tuple<int,int,int>> CentralManager::extractMissingReviews(
 }
 
 // Constrói a rede, corre Edmonds-Karp e guarda o resultado do assignment.
-bool CentralManager::runPrimaryOnlyAssigment() {
+bool CentralManager::runPrimaryOnlyAssignment() {
     // Limpa o estado anterior para evitar misturar execuções.
     hasAssignmentRun = true;
     lastAssignments.clear();
@@ -555,7 +555,7 @@ bool CentralManager::runPrimaryOnlyAssigment() {
     return lastRunFeasible;
 }
 // Um reviewer é de risco se, ao removê-lo, o assignment deixar de ser viável.
-std::vector<int> CentralManager::evaluateRiskone() const {
+std::vector<int> CentralManager::evaluateRiskOne() const {
     std::vector<int> risky;
 
     if (submissions.empty() || reviewers.empty()) {
@@ -594,7 +594,7 @@ std::vector<int> CentralManager::evaluateRiskone() const {
 }
 
 // Escreve o resultado do último assignment em formato compatível com o enunciado.
-bool CentralManager::writeAssignementOutput(const std::string& filename) const {
+bool CentralManager::writeAssignmentOutput(const std::string& filename) const {
     if (!hasAssignmentRun) {
         std::cerr << "Error: no assignment has been run yet.\n";
         return false;
@@ -676,5 +676,5 @@ bool CentralManager::writeRiskOutput(const std::string& filename, const std::vec
 
 // Mantém compatibilidade com uma interface antiga para gerar o output.
 void CentralManager::generateOutputCSV(const std::string& filename) {
-    writeAssignementOutput(filename);
+    writeAssignmentOutput(filename);
 }

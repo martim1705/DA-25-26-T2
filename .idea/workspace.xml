@@ -28,9 +28,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dd38265c-e5f2-4f19-8b60-95ab86c1654a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CentralManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CentralManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/CentralManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
