@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.26)
 # project(DA2026_PRJ1_T02_G00)
 
 project(DA-25-26-T2)
+
 # Mantemos a norma C++14  como nas TP
 set(CMAKE_CXX_STANDARD 14)
 

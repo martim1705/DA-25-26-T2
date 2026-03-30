@@ -12,16 +12,25 @@ class CentralManager {
 private:
 
     /**
-     * @brief Cria um nó fonte, um sumidouro, vértices de revisores e submissões.
-     * Adiciona arestas da fonte para revisores, de revisores para submissões compatíveis, e de submissões para o sumidouro.
-     * @param network O grafo a construir.
-     * @param netSubs Mapa que liga IDs de submissão aos seus vértices.
-     * @param netRevs Mapa que liga IDs de revisor aos seus vértices.
-     * @param source Ponteiro para o vértice fonte gerado.
-     * @param sink Ponteiro para o vértice sumidouro gerado.
-     * @param excludeReviewerId ID de um revisor a excluir (usado na análise de risco).
-     * @note Complexidade Temporal: O(V + E) onde V é o número de submissões e revisores, e E o número de correspondências.
-     */
+    * @brief Constrói a rede de fluxo usada no problema de atribuição de revisões.
+    *
+    * Cria os vértices da fonte, do sumidouro, dos revisores e das submissões.
+    * Adiciona arestas da fonte para os revisores, dos revisores para as submissões
+    * compatíveis, e das submissões para o sumidouro.
+    *
+     * A compatibilidade entre revisores e submissões é determinada pela função
+    * canMatch(), tendo em conta os parâmetros de controlo atualmente carregados.
+    *
+     * @param network Grafo de fluxo a construir.
+     * @param netSubs Mapa que associa cada ID de submissão ao respetivo vértice na rede.
+    * @param netRevs Mapa que associa cada ID de revisor ao respetivo vértice na rede.
+    * @param source Ponteiro de saída para o vértice fonte.
+    * @param sink Ponteiro de saída para o vértice sumidouro.
+    * @param excludeReviewerId ID de um revisor a excluir da rede, usado na análise de risco.
+    *
+    * @note Complexidade temporal: O(R + S + R*S), onde R é o número de revisores
+    * e S o número de submissões.
+    */
     void buildNetwork(
         Graph<NodeInfo>& network,
         std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
@@ -31,8 +40,46 @@ private:
         int excludeReviewerId = -1
     ) const;
 
+    /**
+    * @brief Determina os domínios de submissão que podem ser usados no emparelhamento.
+    *
+    * A lista devolvida depende do valor de GenerateAssignments e, no caso geral,
+    * dos parâmetros booleanos que indicam se os domínios primário e secundário
+    * da submissão podem ser considerados.
+    *
+    * @param sub Informação da submissão a analisar.
+    * @return Vetor com os domínios da submissão elegíveis para matching.
+    *
+     * @note O vetor não contém duplicados nem valores inválidos.
+    */
     std::vector<int> allowedSubmissionDomains(const NodeInfo& sub) const;
+    
+    /**
+    * @brief Determina os domínios de expertise do revisor que podem ser usados no emparelhamento.
+    *
+    * A lista devolvida depende do valor de GenerateAssignments e, no caso geral,
+    * dos parâmetros booleanos que indicam se os domínios primário e secundário
+    * do revisor podem ser considerados.
+    *
+    * @param rev Informação do revisor a analisar.
+    * @return Vetor com os domínios do revisor elegíveis para matching.
+    *
+    * @note O vetor não contém duplicados nem valores inválidos.
+    */
     std::vector<int> allowedReviewerDomains(const NodeInfo& rev) const;
+    
+    /**
+    * @brief Verifica se uma submissão e um revisor são compatíveis segundo os domínios permitidos.
+    *
+    * Compara os domínios elegíveis da submissão com os domínios elegíveis do revisor.
+    * Se existir interseção, o método devolve true e escreve em @p matchDomain o domínio
+    * pelo qual a correspondência foi estabelecida.
+    *
+    * @param sub Informação da submissão.
+    * @param rev Informação do revisor.
+    * @param matchDomain Parâmetro de saída onde é guardado o domínio usado no matching.
+    * @return true se a submissão e o revisor puderem ser emparelhados, false caso contrário.
+    */
     bool canMatch(const NodeInfo& sub, const NodeInfo& rev, int& matchDomain) const;
 
     /** @brief Lê os valores de fluxo nas arestas revisor->submissão e guarda as correspondências com fluxo positivo.
@@ -107,13 +154,15 @@ private:
 
 
     /**
-     * @brief parâmetro numérico que controla a geração de atribuições
-     */
+    * @brief Parâmetro de controlo que define quais os domínios permitidos no matching.
+    *
+    * O significado exato do valor depende da especificação do projeto.
+    */
     int GenerateAssignments = 0;
 
     /**
-     * @brief parâmtro numérico que determina o tipo de análise de risco
-     */
+    * @brief Parâmetro de controlo que define o tipo de análise de risco a executar.
+    */
     int RiskAnalysis = 0;
 
     /**
@@ -235,9 +284,28 @@ public:
      */
     void setSecondarySubmissionDomain(bool value);
 
-    /**Parametros de Controlo*/
+    /**
+    * @brief Define o modo de geração de atribuições.
+    *
+    * Este parâmetro controla que domínios podem ser considerados no matching
+    * entre revisores e submissões.
+    *
+    * @param gen Valor do modo GenerateAssignments lido do ficheiro de input.
+    */
     void setGenerateAssignments(int gen);
+
+    /**
+    * @brief Define o modo de análise de risco a executar.
+    *
+    * @param risk Valor do parâmetro RiskAnalysis lido do ficheiro de input.
+    */
     void setRiskAnalysis(int risk);
+
+    /**
+    * @brief Define o nome do ficheiro de output.
+    *
+    * @param name Nome do ficheiro onde os resultados devem ser escritos.
+    */
     void setOutputFilename(const std::string& name);
 
     /**
@@ -286,16 +354,50 @@ public:
      */
     std::vector<int> evaluateRiskOne() const;
 
-    /// @brief Escreve as listas de atribuição com sucesso ou as submissões com revisões em falta.
+    /**
+    * @brief Escreve o resultado da última execução do algoritmo de atribuição.
+    *
+    * Se a última execução tiver sido viável, escreve as atribuições ordenadas por
+    * submissão e por revisor, bem como o número total de revisões atribuídas.
+    * Caso contrário, escreve as submissões com revisões em falta.
+    *
+    * @param filename Nome do ficheiro de output a gerar.
+    * @return true se o ficheiro tiver sido escrito com sucesso, false caso contrário.
+    */
     bool writeAssignmentOutput(const std::string& filename) const;
 
 
-    /// @brief Escreve o resultado da análise de risco num ficheiro de output.
+    /**
+    * @brief Acrescenta ao ficheiro de output o resultado da análise de risco.
+    *
+    * O método escreve a secção "#Risk Analysis" e a lista de IDs dos revisores
+    * considerados críticos. Se não existirem revisores de risco, a linha seguinte
+    * fica vazia.
+    *
+    * @param filename Nome do ficheiro onde a informação deve ser escrita.
+    * @param risky Vetor com os IDs dos revisores classificados como de risco.
+    * @return true se a escrita tiver sido concluída com sucesso, false caso contrário.
+    */
     bool writeRiskOutput(const std::string& filename, const std::vector<int>& risky) const;
 
-
+    /**
+    * @brief Executa o menu interativo da aplicação.
+    *
+    * Permite carregar ficheiros, visualizar dados, executar o algoritmo de atribuição,
+    * correr a análise de risco e exportar resultados através de um menu textual.
+    */
     void runInteractiveMenu();
-    /// @brief Executa o programa em batch mode
+    
+    /**
+    * @brief Executa o programa em modo batch.
+    *
+    * Carrega o ficheiro de input, executa o algoritmo de atribuição e, se aplicável,
+    * escreve o resultado da atribuição e da análise de risco para o ficheiro de output.
+    *
+    * @param input_file Caminho para o ficheiro CSV de entrada.
+    * @param output_file Nome do ficheiro de output a gerar. Se estiver vazio,
+    * é usado o nome configurado nos dados de entrada.
+    */
     void runBatchMode(const std::string & input_file, const std::string & risk_file);
 
     /// @brief Imprime a estrutura da rede na consola para fins de depuração (debug).
