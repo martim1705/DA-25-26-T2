@@ -374,15 +374,17 @@ void CentralManager::runInteractiveMenu() {
                     std::cout << "Output filename (press Enter for default): ";
                     std::getline(std::cin, outName);
 
+                    std::string finalOut = outName.empty() ? outputFilename : outName;
+
                     // outName will naturally be an empty string if you just press Enter
-                    if (writeAssignmentOutput(outName)) {
+                    if (writeAssignmentOutput(finalOut)) {
                         std::cout << "Results exported successfully.\n";
                     }
 
                     if (RiskAnalysis == 1) {
                         std::vector<int> risky = evaluateRiskOne();
-                        if (writeRiskOutput(outputFilename, risky)) {
-                            std::cout << "Risk analysis written to " << outputFilename << "\n";
+                        if (writeRiskOutput(finalOut, risky)) {
+                            std::cout << "Risk analysis written to " << finalOut << "\n";
                         }
                     }
                 }
