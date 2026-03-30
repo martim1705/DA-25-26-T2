@@ -32,6 +32,11 @@ private:
         int excludeReviewerId = -1
     ) const;
 
+    int getMatchDomain(
+        const NodeInfo& reviewer,
+        const NodeInfo& submission
+    ) const;
+
     /*
     Reads the flow values on reviewer-to-submission edges and keeps the matches
     with positive flow.

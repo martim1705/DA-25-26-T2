@@ -19,6 +19,37 @@ namespace {
     }
 }
 
+int CentralManager::getMatchDomain(
+    const NodeInfo& reviewer,
+    const NodeInfo& submission
+) const {
+    if (primaryReviewerExpertise) {
+        if (primarySubmissionDomain &&
+            reviewer.primaryDomain == submission.primaryDomain) {
+            return reviewer.primaryDomain;
+        }
+
+        if (secondarySubmissionDomain &&
+            reviewer.primaryDomain == submission.secondaryDomain) {
+            return reviewer.primaryDomain;
+        }
+    }
+
+    if (secondaryReviewerExpertise && reviewer.secondaryDomain >= 0) {
+        if (primarySubmissionDomain &&
+            reviewer.secondaryDomain == submission.primaryDomain) {
+            return reviewer.secondaryDomain;
+        }
+
+        if (secondarySubmissionDomain &&
+            reviewer.secondaryDomain == submission.secondaryDomain) {
+            return reviewer.secondaryDomain;
+        }
+    }
+
+    return -1;
+}
+
 void CentralManager::buildPrimaryOnlyNetwork(
     Graph<NodeInfo>& network,
     std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
@@ -67,12 +98,19 @@ void CentralManager::buildPrimaryOnlyNetwork(
         MaxFlow::addResidualEdge(source, itNetReviewer->second, maxReviewsPerReviewer);
     }
 
-    // Connect reviewers to submissions when their primary domains match.
+    // Connect reviewers to submissions when their enabled domains match.
     for (itNetReviewer = netRevs.begin(); itNetReviewer != netRevs.end(); ++itNetReviewer) {
         Vertex<NodeInfo>* reviewerVertex = itNetReviewer->second;
+
         for (itSubmission = netSubs.begin(); itSubmission != netSubs.end(); ++itSubmission) {
             Vertex<NodeInfo>* submissionVertex = itSubmission->second;
-            if (reviewerVertex->getInfo().primaryDomain == submissionVertex->getInfo().primaryDomain) {
+
+            int matchDomain = getMatchDomain(
+                reviewerVertex->getInfo(),
+                submissionVertex->getInfo()
+            );
+
+            if (matchDomain >= 0) {
                 MaxFlow::addResidualEdge(reviewerVertex, submissionVertex, 1);
             }
         }
@@ -475,10 +513,10 @@ std::vector<std::tuple<int,int,int>> CentralManager::extractAssignment(
         for (std::size_t i = 0; i < edges.size(); ++i) {
             Edge<NodeInfo>* edge = edges[i];
             NodeInfo destination = edge->getDest()->getInfo();
-
             if (destination.type == NodeType::submission && edge->getFlow() > 0) {
                 // Se houve fluxo nesta aresta, então esta review foi atribuída.
-                result.push_back(std::make_tuple(destination.id, reviewerId, destination.primaryDomain));
+                int matchDomain = getMatchDomain(reviewerVertex->getInfo(),destination);
+                result.push_back(std::make_tuple(destination.id, reviewerId, matchDomain));
             }
         }
     }
