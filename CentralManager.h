@@ -52,34 +52,70 @@ private:
     ) const;
 
     /**
-     * @brief retorna vetor de (submissionId, reviewerId, matchDomain)
+    * @brief Vetor com as últimas atribuições calculadas, no formato
+    * (submissionId, reviewerId, matchDomain)
      */
-    std::vector <std::tuple<int,int,int>> lastAssignments; // submissionId, reviewerId, matchDomain
+    std::vector <std::tuple<int,int,int>> lastAssignments;
+    /**
+     * @brief vetor com uma atribuição mal-sucedida, no formato
+     * (submissionId, domain, missingReviews)
+     */
+    std::vector <std::tuple<int,int,int>> lastMissing;
 
     /**
-     * @brief retorna vetor de (submissionId, domain, missingReviews)
+     * @brief Variável booleana que é verdadeira se o algoritmo de atribuição foi corrido
      */
-    std::vector <std::tuple<int,int,int>> lastMissing; // submissionId, domain, missingReviews
     bool hasAssignmentRun = false;
+
+    /**
+     * @brief Variável booleana que é verdadeira se a última atribuição foi viável
+     */
     bool lastRunFeasible = false;
 
-
+    /**
+     * @brief Grafo composto por NodeInfo's
+     */
     Graph<NodeInfo> graph;
 
+    /**
+     * @brief Mapa desordenado composto por elementos (int, Vertex<NodeInfo>), onde os vértices correspondem às submissões
+     */
     std::unordered_map<int,Vertex<NodeInfo>*> submissions;
+
+    /**
+     * @brief Mapa desordenado composto por elementos (int, Vertex<NodeInfo>), onde os vértices correspondem aos revisores
+     */
     std::unordered_map<int,Vertex<NodeInfo>*> reviewers;
 
-
+    /**
+     * @brief Variável inteira indica o número mínimo de revisores por submissão
+     */
     int minReviewsPerSubmission = 0;
-    int maxReviewsPerReviewer = 0;
-    bool primaryReviewerExpertise = false; //Connect using primaryReviewerExpertise?
-    bool secondaryReviewerExpertise = false; //Connect using secondaryReviewerExpertise?
-    bool primarySubmissionDomain = false; //Connect using primarySubmissionDomain?
-    bool secondarySubmissionDomain = false; //Connect using secondarySubmissionDomain?
 
-    //Control
-    int GenerateAssignments = 0; //parece redundante
-    int RiskAnalysis = 0; //how many interviewers to remove per cycle in risk analysis
+    /**
+     * @brief Variável inteira indica o número máximo de revisões por revisor
+     */
+    int maxReviewsPerReviewer = 0;
+    bool primaryReviewerExpertise = false;
+    bool secondaryReviewerExpertise = false;
+    bool primarySubmissionDomain = false;
+    bool secondarySubmissionDomain = false;
+
+
+
+    /**
+     * @brief parâmetro numérico que controla a geração de atribuições
+     */
+    int GenerateAssignments = 0;
+
+    /**
+     * @brief parâmtro numérico que determina o tipo de análise de risco
+     */
+    int RiskAnalysis = 0;
+
+    /**
+     * @brief Nome do ficheiro de output a gerar
+     */
     std::string outputFilename;
 
 public:
@@ -91,14 +127,14 @@ public:
 
 /**Subsets*/
     /**
-     *@brief Adiciona a informação da submissão identifica com um id ao grafo
+     *@brief Adiciona a informação da submissão identificada com um id ao grafo
      * @param id identificador da submissão
      * @param info informação acerca da submissão
      */
     void addSubmission(int id, const NodeInfo& info);
 
     /**
-     *@brief Adiciona a informação do revisor identifica com um id ao grafo
+     *@brief Adiciona a informação do revisor identificada com um id ao grafo
      * @param id identificador do revisor
      * @param info informação acerca do revisor
      */
@@ -121,15 +157,15 @@ public:
     bool hasReviewer(int id) const;
 
     /**
-     *
-     * @return std::unordered_map<int, Vertex<NodeInfo>*>& Retorna um mapa de (id, Vertice submissao)
-     */
+    * @brief Obtém o mapa de submissões.
+    * @return Referência constante para o mapa de submissões.
+    */
     const std::unordered_map<int, Vertex<NodeInfo>*>& getSubmissions() const;
 
     /**
-     *
-     * @return std::unordered_map<int, Vertex<NodeInfo>*>& Retorna um mapa de (id, Vertice revisor)
-     */
+    * @brief Obtém o mapa de revisores.
+    * @return Referência constante para o mapa de revisores.
+    */
     const std::unordered_map<int, Vertex<NodeInfo>*>& getReviewers() const;
 
 /**Parametros*/
@@ -236,7 +272,7 @@ public:
     * @return Verdadeiro se a atribuição for viável, falso caso existam revisões em falta.
     * @note Complexidade Temporal: Dominada pelo algoritmo de Edmonds-Karp O(V * E^2).
     */
-    bool runPrimaryOnlyAssigment();
+    bool runPrimaryOnlyAssignment();
 
 
     /**
@@ -245,10 +281,10 @@ public:
      * @return Um vetor com os IDs dos revisores de risco.
      * @note Complexidade Temporal: O(R * V * E^2) onde R é o número de revisores.
      */
-    std::vector<int> evaluateRiskone() const;
+    std::vector<int> evaluateRiskOne() const;
 
     /// @brief Escreve as listas de atribuição com sucesso ou as submissões com revisões em falta.
-    bool writeAssignementOutput(const std::string& filename) const;
+    bool writeAssignmentOutput(const std::string& filename) const;
 
 
     /// @brief Escreve o resultado da análise de risco num ficheiro de output.
@@ -256,13 +292,13 @@ public:
 
 
     void runInteractiveMenu();
-    /// @brief Executa o programa em batch Mode
+    /// @brief Executa o programa em batch mode
     void runBatchMode(const std::string & input_file, const std::string & risk_file);
 
     /// @brief Imprime a estrutura da rede na consola para fins de depuração (debug).
     void printNetwork(Graph<NodeInfo>& network) const;
 
-    /// @brief Metodo de compatibilidade para gerar o ficheiro CSV de output final.
+    /// @brief Método de compatibilidade para gerar o ficheiro CSV de output final.
     void generateOutputCSV(const std::string& filename);
 };
 
