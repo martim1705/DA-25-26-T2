@@ -22,7 +22,7 @@ private:
      * @param excludeReviewerId ID de um revisor a excluir (usado na análise de risco).
      * @note Complexidade Temporal: O(V + E) onde V é o número de submissões e revisores, e E o número de correspondências.
      */
-    void buildPrimaryOnlyNetwork(
+    void buildNetwork(
         Graph<NodeInfo>& network,
         std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
         std::unordered_map<int, Vertex<NodeInfo>*>& netRevs,
@@ -31,10 +31,9 @@ private:
         int excludeReviewerId = -1
     ) const;
 
-    int getMatchDomain(
-        const NodeInfo& reviewer,
-        const NodeInfo& submission
-    ) const;
+    std::vector<int> allowedSubmissionDomains(const NodeInfo& sub) const;
+    std::vector<int> allowedReviewerDomains(const NodeInfo& rev) const;
+    bool canMatch(const NodeInfo& sub, const NodeInfo& rev, int& matchDomain) const;
 
     /** @brief Lê os valores de fluxo nas arestas revisor->submissão e guarda as correspondências com fluxo positivo.
      * @param netRevs Mapa que liga IDs de revisor aos seus vértices.

@@ -17,40 +17,82 @@ namespace {
         }
         return oss.str();
     }
+    void pushUnique(std::vector<int>& v, int value) {
+        if (value < 0) return;
+        if (std::find(v.begin(), v.end(), value) == v.end()) {
+            v.push_back(value);
+        }
+    }
 }
 
-int CentralManager::getMatchDomain(
-    const NodeInfo& reviewer,
-    const NodeInfo& submission
-) const {
-    if (primaryReviewerExpertise) {
-        if (primarySubmissionDomain &&
-            reviewer.primaryDomain == submission.primaryDomain) {
-            return reviewer.primaryDomain;
-        }
+std::vector<int> CentralManager::allowedSubmissionDomains(const NodeInfo& sub) const {
+    std::vector<int> domains;
 
-        if (secondarySubmissionDomain &&
-            reviewer.primaryDomain == submission.secondaryDomain) {
-            return reviewer.primaryDomain;
+    switch (GenerateAssignments) {
+        case 1:
+            pushUnique(domains, sub.primaryDomain);
+            break;
+
+        case 2:
+        case 3:
+            pushUnique(domains, sub.primaryDomain);
+            pushUnique(domains, sub.secondaryDomain);
+            break;
+
+        case 0:
+        default:
+            if (primarySubmissionDomain) pushUnique(domains, sub.primaryDomain);
+            if (secondarySubmissionDomain) pushUnique(domains, sub.secondaryDomain);
+            if (domains.empty()) pushUnique(domains, sub.primaryDomain);
+            break;
+    }
+
+    return domains;
+}
+
+std::vector<int> CentralManager::allowedReviewerDomains(const NodeInfo& rev) const {
+    std::vector<int> domains;
+
+    switch (GenerateAssignments) {
+        case 1:
+        case 2:
+            pushUnique(domains, rev.primaryDomain);
+            break;
+
+        case 3:
+            pushUnique(domains, rev.primaryDomain);
+            pushUnique(domains, rev.secondaryDomain);
+            break;
+
+        case 0:
+        default:
+            if (primaryReviewerExpertise) pushUnique(domains, rev.primaryDomain);
+            if (secondaryReviewerExpertise) pushUnique(domains, rev.secondaryDomain);
+            if (domains.empty()) pushUnique(domains, rev.primaryDomain);
+            break;
+    }
+
+    return domains;
+}
+
+bool CentralManager::canMatch(const NodeInfo& sub, const NodeInfo& rev, int& matchDomain) const {
+    std::vector<int> subDomains = allowedSubmissionDomains(sub);
+    std::vector<int> revDomains = allowedReviewerDomains(rev);
+
+    for (int sd : subDomains) {
+        for (int rd : revDomains) {
+            if (sd == rd) {
+                matchDomain = sd;
+                return true;
+            }
         }
     }
 
-    if (secondaryReviewerExpertise && reviewer.secondaryDomain >= 0) {
-        if (primarySubmissionDomain &&
-            reviewer.secondaryDomain == submission.primaryDomain) {
-            return reviewer.secondaryDomain;
-        }
-
-        if (secondarySubmissionDomain &&
-            reviewer.secondaryDomain == submission.secondaryDomain) {
-            return reviewer.secondaryDomain;
-        }
-    }
-
-    return -1;
+    matchDomain = -1;
+    return false;
 }
 
-void CentralManager::buildPrimaryOnlyNetwork(
+void CentralManager::buildNetwork(
     Graph<NodeInfo>& network,
     std::unordered_map<int, Vertex<NodeInfo>*>& netSubs,
     std::unordered_map<int, Vertex<NodeInfo>*>& netRevs,
@@ -58,7 +100,6 @@ void CentralManager::buildPrimaryOnlyNetwork(
     Vertex<NodeInfo>*& sink,
     int excludeReviewerId
 ) const {
-    // Create source and sink nodes for the flow network.
     NodeInfo src{NodeType::source, -1, -1, -1, "", "", "", ""};
     NodeInfo snk{NodeType::sink, -2, -1, -1, "", "", "", ""};
 
@@ -68,57 +109,46 @@ void CentralManager::buildPrimaryOnlyNetwork(
     source = network.findVertex(src);
     sink = network.findVertex(snk);
 
-    // Add reviewer vertices, optionally skipping one reviewer for risk analysis.
-    std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator itReviewer;
-    for (itReviewer = reviewers.begin(); itReviewer != reviewers.end(); ++itReviewer) {
-        int id = itReviewer->first;
-        Vertex<NodeInfo>* v = itReviewer->second;
-
+    for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator it = reviewers.begin(); it != reviewers.end(); ++it) {
+        const int id = it->first;
+        Vertex<NodeInfo>* v = it->second;
         if (id == excludeReviewerId) continue;
-
         NodeInfo info = v->getInfo();
         network.addVertex(info);
         netRevs[id] = network.findVertex(info);
     }
-    //std::cout << "first for loop passed...\n";
-    // Add submission vertices to the flow network.
-    std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator itSubmission;
-    for (itSubmission = submissions.begin(); itSubmission != submissions.end(); ++itSubmission) {
-        int id = itSubmission->first;
-        Vertex<NodeInfo>* v = itSubmission->second;
 
+    for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator it = submissions.begin(); it != submissions.end(); ++it) {
+        const int id = it->first;
+        Vertex<NodeInfo>* v = it->second;
         NodeInfo info = v->getInfo();
         network.addVertex(info);
         netSubs[id] = network.findVertex(info);
     }
 
-    // Limit the maximum number of assignments per reviewer.
-    std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator itNetReviewer;
-    for (itNetReviewer = netRevs.begin(); itNetReviewer != netRevs.end(); ++itNetReviewer) {
-        MaxFlow::addResidualEdge(source, itNetReviewer->second, maxReviewsPerReviewer);
+    for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator it = netRevs.begin(); it != netRevs.end(); ++it) {
+        Vertex<NodeInfo>* reviewerVertex = it->second;
+        MaxFlow::addResidualEdge(source, reviewerVertex, maxReviewsPerReviewer);
     }
 
-    // Connect reviewers to submissions when their enabled domains match.
-    for (itNetReviewer = netRevs.begin(); itNetReviewer != netRevs.end(); ++itNetReviewer) {
-        Vertex<NodeInfo>* reviewerVertex = itNetReviewer->second;
+    for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator revIt = netRevs.begin(); revIt != netRevs.end(); ++revIt) {
+        Vertex<NodeInfo>* reviewerVertex = revIt->second;
+        const NodeInfo revInfo = reviewerVertex->getInfo();
 
-        for (itSubmission = netSubs.begin(); itSubmission != netSubs.end(); ++itSubmission) {
-            Vertex<NodeInfo>* submissionVertex = itSubmission->second;
+        for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator subIt = netSubs.begin(); subIt != netSubs.end(); ++subIt) {
+            Vertex<NodeInfo>* submissionVertex = subIt->second;
+            const NodeInfo subInfo = submissionVertex->getInfo();
+            int matchDomain = -1;
 
-            int matchDomain = getMatchDomain(
-                reviewerVertex->getInfo(),
-                submissionVertex->getInfo()
-            );
-
-            if (matchDomain >= 0) {
+            if (canMatch(subInfo, revInfo, matchDomain)) {
                 MaxFlow::addResidualEdge(reviewerVertex, submissionVertex, 1);
             }
         }
     }
 
-    // Require each submission to receive the minimum number of reviews.
-    for (itSubmission = netSubs.begin(); itSubmission != netSubs.end(); ++itSubmission) {
-        MaxFlow::addResidualEdge(itSubmission->second, sink, minReviewsPerSubmission);
+    for (std::unordered_map<int, Vertex<NodeInfo>*>::const_iterator it = netSubs.begin(); it != netSubs.end(); ++it) {
+        Vertex<NodeInfo>* submissionVertex = it->second;
+        MaxFlow::addResidualEdge(submissionVertex, sink, minReviewsPerSubmission);
     }
 }
 
@@ -228,42 +258,36 @@ void CentralManager::clearData() {
 }
 
 
-// Executa o fluxo completo sem interação: carregar, atribuir e exportar.
-void CentralManager::runBatchMode(const std::string &input_file, const std::string &output_file) {
+void CentralManager::runBatchMode(const std::string& input_file, const std::string& output_file) {
     std::cout << "Batch Mode\n";
-    //Removi a imposição da pasta input, em batch mode.
-    if (!loadFiles(input_file)) {
-        return;
-    }
 
-    //Ignorar os output files dentro dos .csv, o commando é rei e senhor!
+    if (!loadFiles(input_file)) return;
+
     if (!output_file.empty()) {
         outputFilename = output_file;
     }
 
-
-    // Corre primeiro o assignment principal antes de qualquer análise extra.
     const bool feasible = runPrimaryOnlyAssignment();
 
-    if (GenerateAssignments != 0 || !feasible) {
-        //Por estar a usar modo append é preciso limpar o ficheiro, se o ficheiro já existir
-        std::ofstream clearFile("./output/"+ outputFilename);
-        clearFile.close();
+    const std::string finalOut = outputFilename.empty() ? "output.csv" : outputFilename;
 
-        if (writeAssignmentOutput(outputFilename)) {
-           std::cout << "Assignment output written to " << outputFilename << "\n";
+    std::ofstream clearFile("./output/" + finalOut);
+    clearFile.close();
+
+    if (GenerateAssignments != 0 || !feasible) {
+        if (writeAssignmentOutput(finalOut)) {
+            std::cout << "Assignment output written to " << finalOut << "\n";
         }
     }
 
-    // A análise de risco só é feita para o caso K = 1.
     if (RiskAnalysis == 1) {
         std::vector<int> risky = evaluateRiskOne();
-        if (writeRiskOutput(outputFilename, risky)) {
-            std::cout << "Risk analysis written to " << outputFilename << "\n";
+        if (writeRiskOutput(finalOut, risky)) {
+            std::cout << "Risk analysis written to " << finalOut << "\n";
+        }
     }
-}
-    std::cout << "Done\n";
 
+    std::cout << "Done\n";
 }
 // teste
 
@@ -516,8 +540,12 @@ std::vector<std::tuple<int,int,int>> CentralManager::extractAssignment(
             Edge<NodeInfo>* edge = edges[i];
             NodeInfo destination = edge->getDest()->getInfo();
             if (destination.type == NodeType::submission && edge->getFlow() > 0) {
-                // Se houve fluxo nesta aresta, então esta review foi atribuída.
-                int matchDomain = getMatchDomain(reviewerVertex->getInfo(),destination);
+                const NodeInfo subInfo = submissions.at(destination.id)->getInfo();
+                const NodeInfo revInfo = reviewers.at(reviewerId)->getInfo();
+
+                int matchDomain = -1;
+                canMatch(subInfo, revInfo, matchDomain);
+
                 result.push_back(std::make_tuple(destination.id, reviewerId, matchDomain));
             }
         }
@@ -581,7 +609,7 @@ bool CentralManager::runPrimaryOnlyAssignment() {
     Vertex<NodeInfo>* source = nullptr;
     Vertex<NodeInfo>* sink = nullptr;
 
-    buildPrimaryOnlyNetwork(network, netSubs, netRevs, source, sink);
+    buildNetwork(network, netSubs, netRevs, source, sink);
 
     // O fluxo máximo representa o número total de reviews atribuídas.
     const int maxFlow = MaxFlow::edmondsKarp(network, source, sink);
@@ -620,7 +648,7 @@ std::vector<int> CentralManager::evaluateRiskOne() const {
         Vertex<NodeInfo>* source = nullptr;
         Vertex<NodeInfo>* sink = nullptr;
 
-        buildPrimaryOnlyNetwork(network, netSubs, netRevs, source, sink, reviewerIds[i]);
+        buildNetwork(network, netSubs, netRevs, source, sink, reviewerIds[i]);
 
         const int maxFlow = MaxFlow::edmondsKarp(network, source, sink);
 
@@ -649,11 +677,10 @@ bool CentralManager::writeAssignmentOutput(const std::string& filename) const {
     }
 
     // Se a atribuição foi viável, exporta os matches por submissão e por reviewer.
-    //if (lastRunFeasible) {
+    if (lastRunFeasible) {
         std::vector<std::tuple<int,int,int>> bySubmission = lastAssignments;
         std::sort(bySubmission.begin(), bySubmission.end());
 
-        // Reorganiza os mesmos dados para facilitar leitura do ponto de vista do reviewer.
         std::vector<std::tuple<int,int,int>> byReviewer;
         for (std::size_t i = 0; i < lastAssignments.size(); ++i) {
             byReviewer.push_back(std::make_tuple(
@@ -679,10 +706,10 @@ bool CentralManager::writeAssignmentOutput(const std::string& filename) const {
         }
 
         out << "#Total: " << bySubmission.size() << "\n";
-    //}
+    }
 
     // Caso contrário, exporta apenas as submissões que ficaram com reviews em falta.
-    if (!lastRunFeasible) {
+    else {
         std::vector<std::tuple<int,int,int>> missing = lastMissing;
         std::sort(missing.begin(), missing.end());
 
@@ -693,7 +720,6 @@ bool CentralManager::writeAssignmentOutput(const std::string& filename) const {
                 << std::get<2>(missing[i]) << "\n";
         }
     }
-
     return true;
 }
 
